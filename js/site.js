@@ -468,38 +468,79 @@
     els.forEach(function(el){ el.classList.add('in'); });
   }
 
-  /* ── 9. FLOATING DOCK NAVIGATION CONTROLLER ─────────── */
-  function initBottomNav() {
-    var path = (window.location.pathname || '').toLowerCase();
-    var tabs = document.querySelectorAll('.dock-tab');
-    if (!tabs.length) return;
+  /* ── 9. PARALLAX 3D GRADIENT SCROLL ENGINE (Concept 2) ── */
+  function initParallaxEngine() {
+    var ticking = false;
+    var root = document.documentElement;
 
-    var activeKey = 'home';
-    if (path.indexOf('schedule') !== -1) {
-      activeKey = 'schedule';
-    } else if (path.indexOf('travel') !== -1) {
-      activeKey = 'travel';
-    } else if (path.indexOf('rsvp') !== -1) {
-      activeKey = 'rsvp';
-    } else if (path.indexOf('invite') !== -1) {
-      activeKey = 'invite';
-    } else {
-      activeKey = 'home';
+    function getScrollOffset() {
+      // Find active scroll container
+      var containers = [
+        document.querySelector('main.paper'),
+        document.querySelector('main'),
+        document.querySelector('.schedule-page-wrap'),
+        document.querySelector('.us-page-wrap'),
+        document.querySelector('.stay-page-wrap')
+      ];
+      for (var i = 0; i < containers.length; i++) {
+        var c = containers[i];
+        if (c && c.scrollHeight > c.clientHeight && c.scrollTop > 0) {
+          return { top: c.scrollTop, max: Math.max(1, c.scrollHeight - c.clientHeight) };
+        }
+      }
+      for (var j = 0; j < containers.length; j++) {
+        var el = containers[j];
+        if (el && el.scrollHeight > el.clientHeight) {
+          return { top: el.scrollTop, max: Math.max(1, el.scrollHeight - el.clientHeight) };
+        }
+      }
+      var winTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      var winMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      return { top: winTop, max: winMax };
     }
 
-    tabs.forEach(function(tab) {
-      if (tab.getAttribute('data-page') === activeKey) {
-        tab.classList.add('active');
-      } else {
-        tab.classList.remove('active');
+    function updateParallax() {
+      var scroll = getScrollOffset();
+      var scrollTop = scroll.top;
+      var maxScroll = scroll.max;
+      var progress = Math.min(1, Math.max(0, scrollTop / maxScroll));
+
+      // Plane A: Floating Upper Diya Mist (0.45x scroll speed + soft spatial fade & expansion)
+      var mistY = (scrollTop * -0.45).toFixed(2);
+      var mistScale = (1 + progress * 0.12).toFixed(3);
+      var mistOpacity = Math.max(0.35, 1 - progress * 0.70).toFixed(3);
+
+      // Plane B: Grounded Deep Aipan Canvas (0.15x scroll speed)
+      var baseY = (scrollTop * -0.15).toFixed(2);
+
+      root.style.setProperty('--parallax-mist-y', mistY + 'px');
+      root.style.setProperty('--parallax-mist-scale', mistScale);
+      root.style.setProperty('--parallax-mist-opacity', mistOpacity);
+      root.style.setProperty('--parallax-base-y', baseY + 'px');
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
       }
-    });
+    }
+
+    // Attach listeners to window and capturing document scroll events
+    window.addEventListener('scroll', onScroll, { passive: true });
+    document.addEventListener('scroll', onScroll, { passive: true, capture: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    // Initial tick
+    updateParallax();
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initBottomNav);
+    document.addEventListener('DOMContentLoaded', initParallaxEngine);
   } else {
-    initBottomNav();
+    initParallaxEngine();
   }
 
 })();
