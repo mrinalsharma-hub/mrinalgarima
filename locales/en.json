@@ -98,7 +98,7 @@
   "rsvp.form.name_placeholder": "Enter full name",
   "rsvp.form.btn_add_guest": "+ Add another guest",
   "rsvp.form.phone_title": "Phone",
-  "rsvp.form.phone_placeholder": "This is how we identify you in backend ;)",
+  "rsvp.form.phone_placeholder": "We identify you as this in backend ;)",
   "rsvp.form.events_title": "Events you will attend",
   "rsvp.form.event_opt_mehndi": "Mehndi &nbsp; Fri Nov 20 &nbsp;(optional)",
   "rsvp.form.event_opt_wedding": "Day Wedding &nbsp; Sat Nov 21, 2026",
