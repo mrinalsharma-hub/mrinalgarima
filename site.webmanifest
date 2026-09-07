@@ -1,10 +1,10 @@
 {
-  "name": "Mrinal weds Garima",
-  "short_name": "Mrinal & Garima",
+  "name": "Mrinal & Garima",
+  "short_name": "M&G 2026",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#A71F23",
-  "theme_color": "#A71F23",
+  "background_color": "#170406",
+  "theme_color": "#170406",
   "icons": [
     {
       "src": "images/favicon-64x64.png",
