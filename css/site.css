@@ -1,3 +1,24 @@
+@font-face {
+  font-family: 'Kugile';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/Kugile.ttf?v=24700') format('truetype'),
+       url('../fonts/Kugile_Demo.ttf?v=24700') format('truetype'),
+       local('Kugile');
+}
+
+@font-face {
+  font-family: 'Snell Roundhand';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Snell Roundhand'),
+       local('SnellRoundhand'),
+       url('../fonts/SnellRoundhand.woff?v=24700') format('woff'),
+       url('../fonts/SnellRoundhand.ttf?v=24700') format('truetype');
+}
+
 /* ═══════════════════════════════════════════════════════
    Garima weds Mrinal · Aipan design system
    Ivory line-art on geru red, ported from the invite film
@@ -1230,11 +1251,21 @@ header.site,
 }
 
 /* Content Viewport Clearance */
-main {
+main:not(.celebrations-page-wrap):not(.rsvp-page-wrap):not(.stay-page-wrap) {
   padding-bottom: calc(96px + env(safe-area-inset-bottom, 20px)) !important;
 }
 
-/* ── Unified Seamless Ambient Glass Fixed Bottom Navigation with Aipan Icons ── */
+main.celebrations-page-wrap,
+.celebrations-page-wrap,
+main.stay-page-wrap,
+.stay-page-wrap,
+main.rsvp-page-wrap,
+.rsvp-page-wrap {
+  padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px)) !important;
+  margin-bottom: 0 !important;
+}
+
+/* ── Unified Seamless Ambient Glass Fixed Bottom Navigation with Aipan Icons (Figma Node 18:202) ── */
 header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-nav { display: none !important; }
 .fixed-bottom-nav {
   box-sizing: border-box !important;
@@ -1244,30 +1275,16 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   right: 0 !important;
   width: 100vw !important;
   height: auto !important;
-  min-height: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
-  padding: 0 !important;
-  padding-bottom: constant(safe-area-inset-bottom) !important;
-  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-  background: #A71F23 !important;
-  background-color: #A71F23 !important;
-  backdrop-filter: blur(16px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  padding: 10px clamp(12px, 5vw, 28px) calc(2px + env(safe-area-inset-bottom, 0px)) !important;
+  background: #ffefd5 !important;
+  background-color: #ffefd5 !important;
   border: none !important;
-  border-top: 1px solid rgba(255, 246, 232, 0.12) !important;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25) !important;
+  border-top: 1px solid rgba(167, 31, 35, 0.12) !important;
+  box-shadow: 0 -4px 20px rgba(110, 33, 26, 0.08) !important;
   z-index: 2147483647 !important;
-  display: -webkit-box !important;
-  display: -webkit-flex !important;
   display: flex !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-box-direction: normal !important;
-  -webkit-flex-direction: column !important;
   flex-direction: column !important;
-  -webkit-box-pack: start !important;
-  -webkit-justify-content: flex-start !important;
-  justify-content: flex-start !important;
-  -webkit-box-align: center !important;
-  -webkit-align-items: center !important;
+  justify-content: center !important;
   align-items: center !important;
   pointer-events: auto !important;
   user-select: none !important;
@@ -1277,55 +1294,46 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   backface-visibility: hidden !important;
   -webkit-backface-visibility: hidden !important;
   contain: layout paint !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease !important;
+  will-change: transform, opacity !important;
+}
+
+.fixed-bottom-nav.nav-hidden,
+.fixed-bottom-nav.is-hidden {
+  transform: translate3d(0, calc(100% + env(safe-area-inset-bottom, 0px) + 24px), 0) !important;
+  -webkit-transform: translate3d(0, calc(100% + env(safe-area-inset-bottom, 0px) + 24px), 0) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .fixed-bottom-nav .nav-container {
   box-sizing: border-box !important;
   width: 100% !important;
-  max-width: 460px !important;
-  height: 68px !important;
-  min-height: 68px !important;
-  max-height: 68px !important;
-  display: -webkit-box !important;
-  display: -webkit-flex !important;
+  max-width: 480px !important;
+  height: auto !important;
+  min-height: 52px !important;
   display: flex !important;
-  -webkit-box-orient: horizontal !important;
-  -webkit-box-direction: normal !important;
-  -webkit-flex-direction: row !important;
   flex-direction: row !important;
-  -webkit-box-align: stretch !important;
-  -webkit-align-items: stretch !important;
-  align-items: stretch !important;
-  -webkit-box-pack: justify !important;
-  -webkit-justify-content: space-around !important;
-  justify-content: space-around !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(16px, 6vw, 32px) !important;
   padding: 0 !important;
   margin: 0 auto !important;
 }
 
 .fixed-bottom-nav .nav-tab {
   box-sizing: border-box !important;
-  flex: 1 1 0% !important;
-  width: 25% !important;
-  max-width: 25% !important;
-  height: 68px !important;
-  min-height: 68px !important;
-  display: -webkit-box !important;
-  display: -webkit-flex !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
+  height: auto !important;
   display: flex !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-box-direction: normal !important;
-  -webkit-flex-direction: column !important;
   flex-direction: column !important;
-  -webkit-box-pack: center !important;
-  -webkit-justify-content: center !important;
   justify-content: center !important;
-  -webkit-box-align: center !important;
-  -webkit-align-items: center !important;
   align-items: center !important;
   text-align: center !important;
   text-decoration: none !important;
-  gap: 5px !important;
+  gap: 8px !important;
   outline: none !important;
   -webkit-tap-highlight-color: transparent !important;
   padding: 0 !important;
@@ -1336,66 +1344,101 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   position: relative !important;
   background: transparent !important;
   border-radius: 0 !important;
-  transition: transform 0.2s ease, opacity 0.2s ease !important;
+  transition: color 0.2s ease, opacity 0.2s ease !important;
 }
 
 .fixed-bottom-nav .nav-tab.active {
   background: transparent !important;
 }
 
-/* Nav Pill Container */
+/* Nav Icon Wrappers & Sizes */
 .fixed-bottom-nav .nav-tab .nav-pill-wrapper {
   box-sizing: border-box !important;
   position: relative !important;
-  display: -webkit-box !important;
-  display: -webkit-flex !important;
   display: flex !important;
-  -webkit-box-pack: center !important;
-  -webkit-justify-content: center !important;
   justify-content: center !important;
-  -webkit-box-align: center !important;
-  -webkit-align-items: center !important;
-  align-items: center !important;
-  width: 24px !important;
-  height: 24px !important;
-  min-height: 24px !important;
+  align-items: flex-end !important;
+  height: 26px !important;
+  min-height: 26px !important;
   margin: 0 !important;
   padding: 0 !important;
   flex-shrink: 0 !important;
+}
+
+.fixed-bottom-nav .nav-tab[data-tab="gm"] .nav-pill-wrapper,
+.fixed-bottom-nav .nav-tab:nth-child(1) .nav-pill-wrapper {
+  width: 30px !important;
+}
+
+.fixed-bottom-nav .nav-tab[data-tab="stay"] .nav-pill-wrapper,
+.fixed-bottom-nav .nav-tab:nth-child(2) .nav-pill-wrapper {
+  width: 26px !important;
+}
+
+.fixed-bottom-nav .nav-tab[data-tab="celebrations"] .nav-pill-wrapper,
+.fixed-bottom-nav .nav-tab:nth-child(3) .nav-pill-wrapper {
+  width: 32px !important;
+}
+
+.fixed-bottom-nav .nav-tab[data-tab="rsvp"] .nav-pill-wrapper,
+.fixed-bottom-nav .nav-tab:nth-child(4) .nav-pill-wrapper {
+  width: 26px !important;
 }
 
 .fixed-bottom-nav .nav-tab .nav-pill {
   display: none !important;
 }
 
-/* Icon (24px x 24px) */
+/* Base Icon Styling */
 .fixed-bottom-nav .nav-tab .nav-icon {
   box-sizing: border-box !important;
-  width: 24px !important;
-  height: 24px !important;
   display: block !important;
+  height: 26px !important;
   flex-shrink: 0 !important;
-  margin: 0 !important;
+  margin: 0 auto !important;
   padding: 0 !important;
-  color: rgba(255, 255, 255, 0.50) !important;
-  opacity: 0.50 !important;
-  fill: currentColor !important;
-  -webkit-filter: none !important;
-  filter: none !important;
-  transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease !important;
-}
-
-/* Active Icon */
-.fixed-bottom-nav .nav-tab.active .nav-icon {
-  color: #FFFFFF !important;
+  color: #E3BE82 !important;
   opacity: 1 !important;
-  fill: #FFFFFF !important;
-  transform: scale(1.08) !important;
+  fill: currentColor !important;
+  stroke: none !important;
+  transform: none !important;
+  -webkit-filter: none !important;
+  filter: none !important;
+  transition: color 0.2s ease, opacity 0.2s ease !important;
+}
+
+.fixed-bottom-nav .nav-tab[data-tab="gm"] .nav-icon,
+.fixed-bottom-nav .nav-tab:nth-child(1) .nav-icon {
+  width: 30px !important;
+}
+
+.fixed-bottom-nav .nav-tab[data-tab="stay"] .nav-icon,
+.fixed-bottom-nav .nav-tab:nth-child(2) .nav-icon {
+  width: 26px !important;
+}
+
+.fixed-bottom-nav .nav-tab[data-tab="celebrations"] .nav-icon,
+.fixed-bottom-nav .nav-tab:nth-child(3) .nav-icon {
+  width: 32px !important;
+}
+
+.fixed-bottom-nav .nav-tab[data-tab="rsvp"] .nav-icon,
+.fixed-bottom-nav .nav-tab:nth-child(4) .nav-icon {
+  width: 26px !important;
+}
+
+/* Active Icon - color #A71F23 and opacity 1 */
+.fixed-bottom-nav .nav-tab.active .nav-icon {
+  color: #A71F23 !important;
+  opacity: 1 !important;
+  fill: #A71F23 !important;
+  stroke: none !important;
+  transform: none !important;
   -webkit-filter: none !important;
   filter: none !important;
 }
 
-/* Label below icon (13.5px, regular for unselected, bold for active, 0.01em tracking, perfect vertical centering) */
+/* Label below icon - strictly identical font treatment (700 bold), color and size for all tabs */
 .fixed-bottom-nav .nav-tab .nav-label {
   box-sizing: border-box !important;
   display: block !important;
@@ -1404,25 +1447,27 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   margin: 0 !important;
   padding: 0 !important;
   font-family: 'Spectral', 'Cinzel', Georgia, serif !important;
-  font-size: 13.5px !important;
-  font-weight: 400 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  font-variant: normal !important;
   text-transform: uppercase !important;
   letter-spacing: 0.01em !important;
-  line-height: 1 !important;
+  line-height: 12px !important;
   height: auto !important;
-  color: rgba(255, 255, 255, 0.50) !important;
-  opacity: 0.95 !important;
+  color: #E3BE82 !important;
+  opacity: 1 !important;
   -webkit-text-shadow: none !important;
   text-shadow: none !important;
   white-space: nowrap !important;
   overflow: visible !important;
   text-overflow: clip !important;
   -webkit-font-smoothing: antialiased !important;
-  transition: color 0.2s ease, opacity 0.2s ease, font-weight 0.2s ease !important;
+  transition: color 0.2s ease, opacity 0.2s ease !important;
 }
 
 .fixed-bottom-nav .nav-tab.active .nav-label {
-  color: #FFFFFF !important;
+  color: #A71F23 !important;
   opacity: 1 !important;
   font-weight: 700 !important;
   -webkit-text-shadow: none !important;
@@ -1440,9 +1485,10 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   content: none !important;
 }
 
+/* No pinch on tap/click - strictly static layout, only color changes */
 .fixed-bottom-nav .nav-tab:active {
-  opacity: 0.8 !important;
-  transform: scale(0.95) !important;
+  opacity: 1 !important;
+  transform: none !important;
   background: transparent !important;
 }
 
@@ -1455,20 +1501,24 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   top: 0 !important;
   left: 0 !important;
   right: 0 !important;
-  bottom: calc(74px + env(safe-area-inset-bottom, 0px)) !important;
+  bottom: 0 !important;
+  height: 100% !important;
   width: 100% !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
   -webkit-overflow-scrolling: touch !important;
-  overscroll-behavior-y: contain !important;
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
   z-index: 2 !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   padding-top: 0 !important;
-  padding-bottom: 50px !important;
+  padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px)) !important;
+  margin-bottom: 0 !important;
   touch-action: pan-y !important;
   transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
@@ -1480,7 +1530,7 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   text-align: center !important;
   margin-top: 0 !important;
   padding-top: 0 !important;
-  margin-bottom: 48px !important;
+  margin-bottom: 32px !important;
   position: relative !important;
   z-index: 3 !important;
   display: flex !important;
@@ -1491,11 +1541,15 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
 .aipan-top-border-wrap {
   width: 100% !important;
   max-width: 100% !important;
-  height: 52.4px !important;
+  height: 93.3px !important;
+  background-image: url('../images/aipan_thick_composite_tile.png?v=35000') !important;
+  background-size: auto 93.3px !important;
+  background-repeat: round no-repeat !important;
+  background-position: left top !important;
   overflow: hidden !important;
   display: block !important;
   margin-top: 0 !important;
-  margin-bottom: 54px !important;
+  margin-bottom: 24px !important;
   position: relative !important;
   z-index: 2 !important;
   pointer-events: none !important;
@@ -1503,19 +1557,17 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
 
 .aipan-top-border-svg,
 .aipan-top-border-img {
-  width: 100% !important;
-  height: 52.4px !important;
-  display: block !important;
+  display: none !important;
 }
 
 .rsvp-mandala-wrap {
   position: relative !important;
-  width: 230px !important;
-  height: 230px !important;
+  width: 262px !important;
+  height: 262px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  margin: 0 auto !important;
+  margin: 0 auto 28px auto !important;
   padding: 0 !important;
   box-sizing: border-box !important;
   flex-shrink: 0 !important;
@@ -1533,7 +1585,7 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   pointer-events: none !important;
   z-index: 1 !important;
   transform-origin: center center !important;
-  animation: rsvpDotsAntiClockwiseSpin 42s linear infinite !important;
+  animation: rsvpDotsAntiClockwiseSpin 48.9s linear infinite !important;
   will-change: transform !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -1542,12 +1594,12 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
 }
 
 .rsvp-mandala-img {
-  width: 209px !important;
-  height: 209px !important;
+  width: 232px !important;
+  height: 232px !important;
   display: block !important;
   object-fit: contain !important;
   transform-origin: center center !important;
-  animation: rsvpMandalaSpin 32s linear infinite !important;
+  animation: rsvpMandalaSpin 35.6s linear infinite !important;
   will-change: transform !important;
   position: relative !important;
   z-index: 2 !important;
@@ -1558,23 +1610,31 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   filter: drop-shadow(0 4px 28px rgba(60, 5, 8, 0.16)) !important;
 }
 
+.rsvp-om-center-static,
 .mandala-center-hands {
   position: absolute !important;
-  top: 50% !important;
+  top: calc(50% - 0.5px) !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  width: 64px !important;
-  height: 64px !important;
+  width: 38.4px !important;
+  height: 35.2px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   pointer-events: none !important;
-  z-index: 4 !important;
+  z-index: 3 !important;
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box !important;
   flex-shrink: 0 !important;
-  filter: drop-shadow(0 3px 14px rgba(60, 5, 8, 0.14)) !important;
+}
+
+.rsvp-om-img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35)) !important;
 }
 
 .mandala-hands-svg {
@@ -1618,27 +1678,27 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
 
 .rsvp-title {
   font-family: 'Cinzel', serif !important;
-  font-size: clamp(30px, 7.5vw, 38px) !important;
-  font-weight: 450 !important;
-  letter-spacing: 0.02em !important;
+  font-size: 48px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0px !important;
   color: #FFFFFF !important;
-  text-shadow: 0 4px 24px rgba(50, 5, 8, 0.20) !important;
+  text-shadow: -0.75px -0.75px 0px rgba(15, 2, 3, 0.65), 0.75px 0.75px 0px rgba(255, 255, 255, 0.25), 0 1.5px 3px rgba(15, 2, 3, 0.20) !important;
   text-transform: uppercase !important;
-  margin-top: 42px !important;
-  margin-bottom: 4px !important;
-  line-height: 1.15 !important;
+  margin-top: 24px !important;
+  margin-bottom: 0 !important;
+  line-height: 0.92 !important;
 }
 
 .rsvp-subtitle {
-  font-family: 'Spectral', Georgia, serif !important;
-  font-weight: 300 !important;
+  font-family: 'Cormorant Upright', serif !important;
+  font-weight: 500 !important;
   font-style: normal !important;
-  font-size: 20px !important;
-  color: #FFFFFF !important;
-  text-shadow: none !important;
-  letter-spacing: 0.010em !important;
+  font-size: 24px !important;
+  color: #FFF5EE !important;
+  text-shadow: -0.75px -0.75px 0px rgba(15, 2, 3, 0.65), 0.75px 0.75px 0px rgba(255, 255, 255, 0.25), 0 1.5px 3px rgba(15, 2, 3, 0.20) !important;
+  letter-spacing: 0.02em !important;
   line-height: 1.4 !important;
-  margin-top: 24px !important;
+  margin-top: 29px !important;
   margin-bottom: 0 !important;
   text-align: center !important;
 }
@@ -1655,15 +1715,23 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
 }
 
 .rsvp-form {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
-  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.rsvp-form.is-hidden {
+  display: none !important;
+}
+#rsvp-thanks.is-visible {
+  display: block !important;
 }
 
 /* Individual Field Card */
 .rsvp-card-section {
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
   border-radius: 12px !important;
   border: none !important;
   box-shadow: none !important;
@@ -1677,21 +1745,20 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
 }
 
 .rsvp-card-title {
-  display: block !important;
-  font-family: 'Cinzel', 'Spectral', serif !important;
+  font-family: 'Cinzel', serif !important;
   font-size: 20px !important;
   font-weight: 400 !important;
-  font-style: normal !important;
-  text-transform: uppercase !important;
   letter-spacing: 0.04em !important;
   line-height: normal !important;
   color: #FFFFFF !important;
+  text-shadow: -0.75px -0.75px 0px rgba(15, 2, 3, 0.65), 0.75px 0.75px 0px rgba(255, 255, 255, 0.25), 0 1.5px 3px rgba(15, 2, 3, 0.20) !important;
   text-align: left !important;
+  text-transform: uppercase !important;
   margin: 0 0 24px 0 !important;
 }
 
 .req-star {
-  color: #FFFFFF !important;
+  color: #FFB800 !important;
   font-family: inherit !important;
   font-weight: 400 !important;
   margin-left: 2px !important;
@@ -1703,11 +1770,12 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
 .rsvp-pill-input {
   width: 100% !important;
   height: 54px !important;
-  background-color: rgba(255, 255, 255, 0.24) !important;
+  background-color: transparent !important;
+  background: transparent !important;
   color: #FFFFFF !important;
-  border: 1.5px solid transparent !important;
+  border: 0.75px solid #FFFFFF !important;
   border-radius: 8px !important;
-  padding: 0 18px !important;
+  padding: 0 12px !important;
   font-family: 'Spectral', Georgia, serif !important;
   font-weight: 300 !important;
   font-style: normal !important;
@@ -1718,40 +1786,43 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   box-sizing: border-box !important;
   -webkit-tap-highlight-color: transparent !important;
   touch-action: manipulation !important;
-  transition: background-color 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.2s ease, border-color 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.12s ease !important;
+  transform: none !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
 }
 
-.rsvp-pill-input:active {
-  transform: scale(0.992) !important;
+.rsvp-pill-input:active,
+.rsvp-pill-input:focus {
+  transform: none !important;
 }
 
 .rsvp-pill-input:focus {
   background-color: #FFFFFF !important;
+  background: #FFFFFF !important;
   color: #19202F !important;
-  border-color: rgba(255, 255, 255, 0.95) !important;
-  box-shadow: 0 0 0 3.5px rgba(255, 255, 255, 0.35) !important;
-  transform: scale(1) !important;
+  border: 0.75px solid #FFFFFF !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .rsvp-pill-input::placeholder,
 .rsvp-pill-input:disabled {
-  color: rgba(255, 255, 255, 0.75) !important;
+  color: rgba(255, 255, 255, 0.28) !important;
+  opacity: 1 !important;
   text-align: left !important;
   font-family: 'Spectral', Georgia, serif !important;
   font-size: 20px !important;
   font-style: normal !important;
   font-weight: 300 !important;
   line-height: normal !important;
-  transition: opacity 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
 }
 
 .rsvp-pill-input:focus::placeholder {
   color: transparent !important;
   opacity: 0 !important;
-  transform: translateX(4px) !important;
+  transform: none !important;
 }
 
-/* Name Row & Add Person Button */
+/* ── Name Row & Google Material Dual Actions (4 Scenarios) ── */
 .name-row-wrap {
   display: flex !important;
   flex-direction: column !important;
@@ -1762,34 +1833,108 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
 .name-input-row {
   position: relative !important;
   width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-.name-input-row .rm-person-btn {
+.name-input-row .rsvp-pill-input {
+  width: 100% !important;
+  padding-right: 76px !important;
+}
+
+.name-row-actions {
   position: absolute !important;
   right: 8px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  z-index: 5 !important;
+}
+
+.name-action-btn {
   background: none !important;
   border: none !important;
-  color: #8B1E22 !important;
-  font-size: 20px !important;
-  line-height: 1 !important;
   cursor: pointer !important;
-  padding: 8px !important;
-  width: 36px !important;
-  height: 36px !important;
+  padding: 4px !important;
+  width: 32px !important;
+  height: 32px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   border-radius: 50% !important;
   -webkit-tap-highlight-color: transparent !important;
   touch-action: manipulation !important;
-  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.15s ease !important;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.15s ease, opacity 0.15s ease !important;
 }
 
-.name-input-row .rm-person-btn:active {
-  transform: translateY(-50%) scale(0.85) !important;
+.name-action-btn:active {
+  transform: scale(0.88) !important;
+}
+
+.name-action-btn .mat-icon {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* ── Scenario 1 & Scenario 4: Empty Text Field (NO icons at all, whether focused or not) ── */
+.name-input-row.is-empty .name-row-actions,
+.name-input-row.is-empty .done-btn,
+.name-input-row.is-empty .rm-person-btn {
+  display: none !important;
+}
+
+/* ── Scenario 2: Active Focused with Text (Both Green Tick & Wine Cross appear) ── */
+.name-input-row:not(.is-empty).is-editing .name-row-actions,
+.name-input-row:not(.is-empty) .rsvp-pill-input:focus ~ .name-row-actions {
+  display: flex !important;
+}
+
+.name-input-row:not(.is-empty).is-editing .done-btn,
+.name-input-row:not(.is-empty) .rsvp-pill-input:focus ~ .name-row-actions .done-btn {
+  display: flex !important;
+  color: #2E7D32 !important; /* Google Material green check */
+  opacity: 1 !important;
+}
+
+.name-input-row:not(.is-empty).is-editing .done-btn:hover,
+.name-input-row:not(.is-empty) .rsvp-pill-input:focus ~ .name-row-actions .done-btn:hover {
+  background-color: rgba(46, 125, 50, 0.12) !important;
+}
+
+.name-input-row:not(.is-empty).is-editing .rm-person-btn,
+.name-input-row:not(.is-empty) .rsvp-pill-input:focus ~ .name-row-actions .rm-person-btn {
+  display: flex !important;
+  color: #8B1E22 !important; /* Google Material wine close on white */
+  opacity: 0.95 !important;
+}
+
+.name-input-row:not(.is-empty).is-editing .rm-person-btn:hover,
+.name-input-row:not(.is-empty) .rsvp-pill-input:focus ~ .name-row-actions .rm-person-btn:hover {
   background-color: rgba(139, 30, 34, 0.10) !important;
+  opacity: 1 !important;
+}
+
+/* ── Scenario 3: Unfocused with Text (Done / Confirmed: Tick hidden, Pure White Cross remains) ── */
+.name-input-row:not(.is-empty):not(.is-editing) .name-row-actions {
+  display: flex !important;
+}
+
+.name-input-row:not(.is-empty):not(.is-editing) .done-btn {
+  display: none !important; /* Tick disappears completely */
+}
+
+.name-input-row:not(.is-empty):not(.is-editing) .rm-person-btn {
+  display: flex !important;
+  color: #FFFFFF !important; /* Pure white cross */
+  opacity: 0.95 !important;
+}
+
+.name-input-row:not(.is-empty):not(.is-editing) .rm-person-btn:hover {
+  opacity: 1 !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
 .add-person-btn {
@@ -1817,6 +1962,13 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   opacity: 0.85 !important;
 }
 
+.add-person-btn:disabled,
+.add-person-btn.is-disabled {
+  opacity: 0.35 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
 .add-person-btn:active {
   opacity: 0.65 !important;
   transform: scale(0.96) !important;
@@ -1833,6 +1985,7 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   padding: 0 !important;
 }
 
+/* ── Completely Static Radio & Checkbox Controls (No Jumping / Scaling) ── */
 .rsvp-option-label {
   display: flex !important;
   align-items: center !important;
@@ -1845,12 +1998,13 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   border-radius: 8px !important;
   -webkit-tap-highlight-color: transparent !important;
   touch-action: manipulation !important;
-  transition: opacity 0.15s ease, transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  transform: none !important;
+  transition: opacity 0.15s ease !important;
 }
 
 .rsvp-option-label:active {
-  opacity: 0.72 !important;
-  transform: scale(0.985) !important;
+  opacity: 0.85 !important;
+  transform: none !important;
 }
 
 .rsvp-option-label input {
@@ -1872,16 +2026,20 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   position: relative !important;
   box-sizing: border-box !important;
   flex-shrink: 0 !important;
-  transition: border-color 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease !important;
+  transform: none !important;
+  animation: none !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease !important;
 }
 
 .rsvp-option-label:active .rsvp-radio-mark {
-  transform: scale(0.92) !important;
+  transform: none !important;
 }
 
 .rsvp-option-label input:checked + .rsvp-radio-mark {
   border-color: #FFFFFF !important;
-  animation: nativeControlPop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  background: transparent !important;
+  transform: none !important;
+  animation: none !important;
 }
 
 .rsvp-option-label input:checked + .rsvp-radio-mark::after {
@@ -1894,7 +2052,7 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   height: 12px !important;
   border-radius: 50% !important;
   background: #FFFFFF !important;
-  animation: nativeSpringDot 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  animation: none !important;
 }
 
 /* Custom Checkbox Square */
@@ -1908,17 +2066,20 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   position: relative !important;
   box-sizing: border-box !important;
   flex-shrink: 0 !important;
-  transition: background-color 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  transform: none !important;
+  animation: none !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease !important;
 }
 
 .rsvp-option-label:active .rsvp-check-mark {
-  transform: scale(0.92) !important;
+  transform: none !important;
 }
 
 .rsvp-option-label input:checked + .rsvp-check-mark {
   background: #FFFFFF !important;
   border-color: #FFFFFF !important;
-  animation: nativeControlPop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  transform: none !important;
+  animation: none !important;
 }
 
 .rsvp-option-label input:checked + .rsvp-check-mark::after {
@@ -1931,23 +2092,8 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   border: solid #8B1E22 !important;
   border-width: 0 2.4px 2.4px 0 !important;
   transform: translate(-50%, -50%) rotate(45deg) !important;
-  animation: nativeCheckSpring 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  animation: none !important;
 }
-
-@keyframes nativeControlPop {
-  0% { transform: scale(0.90); }
-  55% { transform: scale(1.12); }
-  100% { transform: scale(1); }
-}
-
-@keyframes nativeSpringDot {
-  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-  60% { transform: translate(-50%, -50%) scale(1.25); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-}
-
-@keyframes nativeCheckSpring {
-  0% { transform: translate(-50%, -50%) rotate(45deg) scale(0); opacity: 0; }
   60% { transform: translate(-50%, -50%) rotate(45deg) scale(1.25); opacity: 1; }
   100% { transform: translate(-50%, -50%) rotate(45deg) scale(1); opacity: 1; }
 }
@@ -1958,8 +2104,10 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   font-size: 20px !important;
   font-weight: 300 !important;
   font-style: normal !important;
+  letter-spacing: 0.010em !important;
   line-height: normal !important;
   color: #FFFFFF !important;
+  text-shadow: -0.75px -0.75px 0px rgba(15, 2, 3, 0.65), 0.75px 0.75px 0px rgba(255, 255, 255, 0.25), 0 1.5px 3px rgba(15, 2, 3, 0.20) !important;
   text-align: left !important;
   transition: opacity 0.15s ease !important;
 }
@@ -1970,30 +2118,45 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   font-size: 20px !important;
   font-weight: 500 !important;
   font-style: normal !important;
+  letter-spacing: 0.010em !important;
   line-height: normal !important;
   color: #FFFFFF !important;
+  text-shadow: -0.75px -0.75px 0px rgba(15, 2, 3, 0.65), 0.75px 0.75px 0px rgba(255, 255, 255, 0.25), 0 1.5px 3px rgba(15, 2, 3, 0.20) !important;
 }
 
-/* 4. Disabled/Educational text (60% lower opacity = 40% on dark background) */
+.rsvp-event-dot {
+  color: #FFB800 !important;
+  font-size: 14px !important;
+  margin: 0 6px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  line-height: 1 !important;
+  text-shadow: 0 1px 2px rgba(15, 2, 3, 0.40) !important;
+}
+
+/* 4. Event Date (Matching White Text with Subtle Deboss) */
 .rsvp-event-date {
   font-family: 'Spectral', Georgia, serif !important;
   font-size: 20px !important;
   font-weight: 300 !important;
   font-style: normal !important;
+  letter-spacing: 0.010em !important;
   line-height: normal !important;
-  color: rgba(255, 255, 255, 0.40) !important;
-  margin-left: 8px !important;
+  color: #FFFFFF !important;
+  margin-left: 0 !important;
+  text-shadow: -0.75px -0.75px 0px rgba(15, 2, 3, 0.65), 0.75px 0.75px 0px rgba(255, 255, 255, 0.25), 0 1.5px 3px rgba(15, 2, 3, 0.20) !important;
 }
 
 /* Rounded Textarea — Smooth Native Focus */
 .rsvp-textarea-card {
   width: 100% !important;
   height: 110px !important;
-  background-color: rgba(255, 255, 255, 0.24) !important;
+  background-color: transparent !important;
+  background: transparent !important;
   color: #FFFFFF !important;
-  border: 1.5px solid transparent !important;
+  border: 0.75px solid #FFFFFF !important;
   border-radius: 8px !important;
-  padding: 16px 18px !important;
+  padding: 16px 12px !important;
   font-family: 'Spectral', Georgia, serif !important;
   font-weight: 300 !important;
   font-style: normal !important;
@@ -2005,38 +2168,41 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   resize: none !important;
   -webkit-tap-highlight-color: transparent !important;
   touch-action: manipulation !important;
-  transition: background-color 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.2s ease, border-color 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.12s ease !important;
+  transform: none !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
 }
 
-.rsvp-textarea-card:active {
-  transform: scale(0.992) !important;
+.rsvp-textarea-card:active,
+.rsvp-textarea-card:focus {
+  transform: none !important;
 }
 
 .rsvp-textarea-card:focus {
   background-color: #FFFFFF !important;
+  background: #FFFFFF !important;
   color: #19202F !important;
-  border-color: rgba(255, 255, 255, 0.95) !important;
-  box-shadow: 0 0 0 3.5px rgba(255, 255, 255, 0.35) !important;
-  transform: scale(1) !important;
+  border: 0.75px solid #FFFFFF !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 /* 4. Disabled/Educational text in light field */
 .rsvp-textarea-card::placeholder,
 .rsvp-textarea-card:disabled {
-  color: rgba(255, 255, 255, 0.75) !important;
+  color: rgba(255, 255, 255, 0.28) !important;
+  opacity: 1 !important;
   text-align: left !important;
   font-family: 'Spectral', Georgia, serif !important;
   font-size: 20px !important;
   font-style: normal !important;
   font-weight: 300 !important;
   line-height: normal !important;
-  transition: opacity 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
 }
 
 .rsvp-textarea-card:focus::placeholder {
   color: transparent !important;
   opacity: 0 !important;
-  transform: translateX(4px) !important;
+  transform: none !important;
 }
 
 /* 5. Button Text — Tactile Spring Response */
@@ -2055,18 +2221,18 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   width: 100% !important;
   height: 64px !important;
   min-height: 64px !important;
-  padding: 0 24px !important;
+  padding: 2px 24px 0 24px !important;
   background: #FFF6E8 !important;
   color: #7B181B !important;
   border: none !important;
   cursor: pointer !important;
   border-radius: 9999px !important;
-  font-family: 'Cinzel', 'Spectral', serif !important;
+  font-family: 'Cinzel', serif !important;
   font-weight: 600 !important;
-  font-size: 18px !important;
-  letter-spacing: 0.08em !important;
+  font-size: 20px !important;
+  letter-spacing: 0.04em !important;
   line-height: 1 !important;
-  text-transform: uppercase !important;
+  text-transform: none !important;
   -webkit-tap-highlight-color: transparent !important;
   touch-action: manipulation !important;
   box-shadow: 0 6px 20px rgba(20, 2, 4, 0.25) !important;
@@ -2102,7 +2268,7 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
   display: none;
   text-align: center;
   padding: 40px 24px !important;
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
   border-radius: 12px !important;
   border: none !important;
   box-shadow: none !important;
@@ -2146,3 +2312,273 @@ header.site, #menu-panel, .mobile-wheel-nav, .site-bottom-nav, .floating-dock-na
 
 
 
+
+
+/* ── Universal Royal Medallion Music Player (Figma Node 26:627 · 56x56px) ── */
+.celebration-player-btn,
+.global-audio-pill {
+  position: fixed !important;
+  top: max(14px, env(safe-area-inset-top, 14px)) !important;
+  right: max(14px, env(safe-area-inset-right, 14px)) !important;
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;
+  cursor: pointer !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  filter: drop-shadow(0 2px 8px rgba(167, 31, 35, 0.12)) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  z-index: 9999 !important;
+  transform: translateZ(0) !important;
+  -webkit-transform: translateZ(0) !important;
+  transition: filter 0.25s ease, opacity 0.25s ease !important;
+}
+
+/* Hide floating medallion player on Home page (G&M.html / index.html) where centerpiece Vinyl Player is used */
+body.home-page .celebration-player-btn,
+body.home-page #global-music-player,
+body[data-page="gm"] .celebration-player-btn,
+body[data-page="gm"] #global-music-player {
+  display: none !important;
+}
+
+/* Ensure floating medallion player is ALWAYS visible on all other tabs */
+body:not(.home-page):not([data-page="gm"]) .celebration-player-btn,
+body:not(.home-page):not([data-page="gm"]) #global-music-player {
+  display: block !important;
+}
+
+.celebration-player-btn:hover,
+.global-audio-pill:hover {
+  filter: drop-shadow(0 4px 14px rgba(167, 31, 35, 0.22)) !important;
+}
+
+.celebration-player-btn:active,
+.global-audio-pill:active {
+  filter: drop-shadow(0 1px 4px rgba(167, 31, 35, 0.18)) !important;
+}
+
+.celebration-player-btn .player-state-img,
+.global-audio-pill .player-state-img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  -webkit-transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), -webkit-transform 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* State 1: Play (Default when not playing) */
+.celebration-player-btn .player-img-play,
+.global-audio-pill .player-img-play {
+  opacity: 1 !important;
+  transform: scale(1) translateZ(0) !important;
+  -webkit-transform: scale(1) translateZ(0) !important;
+}
+.celebration-player-btn .player-img-pause,
+.global-audio-pill .player-img-pause {
+  opacity: 0 !important;
+  transform: scale(0.88) translateZ(0) !important;
+  -webkit-transform: scale(0.88) translateZ(0) !important;
+}
+
+/* State 2: Pause (When music is playing) */
+.celebration-player-btn.is-playing .player-img-play,
+.global-audio-pill.is-playing .player-img-play {
+  opacity: 0 !important;
+  transform: scale(0.88) translateZ(0) !important;
+  -webkit-transform: scale(0.88) translateZ(0) !important;
+}
+.celebration-player-btn.is-playing .player-img-pause,
+.global-audio-pill.is-playing .player-img-pause {
+  opacity: 1 !important;
+  transform: scale(1) translateZ(0) !important;
+  -webkit-transform: scale(1) translateZ(0) !important;
+}
+
+
+/* ── Full-Canvas Tonal Botanical Jacquard Pattern (Option 1) ── */
+.rsvp-botanical-art-layer {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-image: url('../images/rsvp_botanical_gold_lines.webp?v=16600') !important;
+  background-repeat: repeat !important;
+  background-position: top center !important;
+  background-size: 795px 795px !important;
+  mix-blend-mode: soft-light !important;
+  opacity: 0.42 !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+
+/* ── Events Page Botanical Background Art Layer ── */
+.events-botanical-art-layer {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-image: url('../images/events_botanical_tonal_lines.webp?v=12200') !important;
+  background-repeat: repeat !important;
+  background-position: top center !important;
+  background-size: 418px 418px !important;
+  opacity: 0.25 !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Audio player placement on rsvp.html below Aipan top border */
+body.rsvp-page .global-audio-pill,
+.rsvp-hero-header .global-audio-pill,
+.rsvp-page-wrap .global-audio-pill,
+.rsvp-page-wrap ~ .global-audio-pill {
+  position: absolute !important;
+  top: max(60px, calc(52.4px + 8px + env(safe-area-inset-top, 0px))) !important;
+  right: max(14px, env(safe-area-inset-right, 14px)) !important;
+  z-index: 25 !important;
+}
+
+/* ── Locked-in Royal Carmine Gradient for rsvp.html ── */
+body.rsvp-page,
+.rsvp-bg-layer {
+  background-color: #B02428 !important;
+}
+.rsvp-bg-layer {
+  background: 
+    radial-gradient(ellipse 135% 60% at 50% 100%, rgba(98, 10, 14, 0.95) 0%, rgba(98, 10, 14, 0.55) 50%, transparent 80%),
+    radial-gradient(ellipse 118% 75% at 50% 0%, #B02428 0%, #94181C 25%, #7B1115 50%, #620B0E 75%, #4C070A 100%) !important;
+}
+.rsvp-bg-layer::before {
+  background: 
+    radial-gradient(circle 380px at 45% 15%, rgba(248, 130, 50, 0.11) 0%, rgba(235, 60, 85, 0.05) 55%, transparent 85%),
+    radial-gradient(ellipse 135% 60% at 50% 18%, rgba(248, 140, 55, 0.08) 0%, transparent 80%) !important;
+}
+
+/* ── Unified Light Theme Bottom Navigation for RSVP page ── */
+body.rsvp-page .fixed-bottom-nav,
+.rsvp-page-wrap ~ .fixed-bottom-nav {
+  background: #FFEFD4 !important;
+  background-color: #FFEFD4 !important;
+  border-top: 1px solid rgba(167, 31, 35, 0.12) !important;
+  box-shadow: 0 -4px 20px rgba(110, 33, 26, 0.08) !important;
+}
+
+body.rsvp-page .fixed-bottom-nav .nav-tab.active .nav-icon,
+body.rsvp-page .fixed-bottom-nav .nav-tab.active .nav-label,
+.rsvp-page-wrap ~ .fixed-bottom-nav .nav-tab.active .nav-icon,
+.rsvp-page-wrap ~ .fixed-bottom-nav .nav-tab.active .nav-label {
+  color: #A71F23 !important;
+  fill: #A71F23 !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  text-shadow: none !important;
+  -webkit-text-shadow: none !important;
+}
+
+
+
+
+/* On confirmation screen, hide the RSVP instructions subtitle */
+.rsvp-hero-header.is-confirmed .rsvp-subtitle,
+.rsvp-page-wrap.is-confirmed .rsvp-subtitle,
+body.rsvp-confirmed .rsvp-subtitle {
+  display: none !important;
+}
+
+.rsvp-hero-header.is-confirmed {
+  margin-bottom: 36px !important;
+}
+
+
+/* ── Disabled Card Sections when Declining RSVP (Identical Background Treatment, Dimmed Text) ── */
+.rsvp-card-section.is-disabled-section {
+  pointer-events: none !important;
+  user-select: none !important;
+  cursor: not-allowed !important;
+  /* Keep background and blur identical to enabled cards */
+  background: rgba(255, 255, 255, 0.06) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 12px !important;
+}
+
+.rsvp-card-section.is-disabled-section .rsvp-card-title,
+.rsvp-card-section.is-disabled-section .rsvp-option-text,
+.rsvp-card-section.is-disabled-section .rsvp-event-name,
+.rsvp-card-section.is-disabled-section .rsvp-event-date,
+.rsvp-card-section.is-disabled-section .rsvp-event-dot,
+.rsvp-card-section.is-disabled-section .req-star {
+  opacity: 0.32 !important;
+  transition: opacity 0.25s ease !important;
+}
+
+.rsvp-card-section.is-disabled-section .rsvp-check-mark {
+  opacity: 0.30 !important;
+  border-color: rgba(255, 255, 255, 0.40) !important;
+  transition: opacity 0.25s ease, border-color 0.25s ease !important;
+}
+
+.rsvp-card-section.is-disabled-section .rsvp-pill-input,
+.rsvp-card-section.is-disabled-section .rsvp-textarea-card {
+  opacity: 0.32 !important;
+  border-color: rgba(255, 255, 255, 0.40) !important;
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+  transition: opacity 0.25s ease, border-color 0.25s ease !important;
+}
+
+.rsvp-card-section.is-disabled-section .rsvp-pill-input::placeholder,
+.rsvp-card-section.is-disabled-section .rsvp-textarea-card::placeholder {
+  color: rgba(255, 255, 255, 0.32) !important;
+  opacity: 1 !important;
+}
+
+
+/* ── Floating Gold Sparks & Diya Embers Canvas ── */
+.particles-canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+/* Hide Sheet Drag Handle globally */
+.sheet-drag-handle {
+  display: none !important;
+}

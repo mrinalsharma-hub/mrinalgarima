@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G&M Content Studio · Google Material CMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Google+Sans+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       MATERIAL DESIGN 3 (M3) DESIGN TOKENS & GOOGLE PRODUCT DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      /* M3 Primary (Google Blue) */
+      --md-sys-color-primary: #0B57D0;
+      --md-sys-color-primary-hover: #0842A0;
+      --md-sys-color-on-primary: #FFFFFF;
+      --md-sys-color-primary-container: #D3E3FD;
+      --md-sys-color-on-primary-container: #041E49;
+
+      /* M3 Secondary & Neutral Variants */
+      --md-sys-color-secondary: #5F6368;
+      --md-sys-color-secondary-container: #E8EAED;
+      --md-sys-color-on-secondary-container: #1F1F1F;
+
+      /* M3 Surface & Backgrounds */
+      --md-sys-color-surface: #FFFFFF;
+      --md-sys-color-surface-dim: #F1F4F9;
+      --md-sys-color-surface-container: #F8FAFD;
+      --md-sys-color-surface-container-high: #E9EEF6;
+      --md-sys-color-surface-variant: #F1F3F4;
+      --md-sys-color-on-surface: #1F1F1F;
+      --md-sys-color-on-surface-variant: #444746;
+      --md-sys-color-on-surface-muted: #5F6368;
+
+      /* M3 Outlines & Borders */
+      --md-sys-color-outline: #DADCE0;
+      --md-sys-color-outline-variant: #E0E3E7;
+      --md-sys-color-outline-focus: #0B57D0;
+
+      /* M3 Status Colors */
+      --md-sys-color-success: #137333;
+      --md-sys-color-success-container: #E6F4EA;
+      --md-sys-color-on-success-container: #072711;
+
+      --md-sys-color-warning: #B06000;
+      --md-sys-color-warning-container: #FEF7E0;
+      --md-sys-color-on-warning-container: #3E1C00;
+
+      --md-sys-color-error: #B3261E;
+      --md-sys-color-error-container: #FCE8E6;
+      --md-sys-color-on-error-container: #410E0B;
+
+      /* Google 4-Color Accents */
+      --google-blue: #1A73E8;
+      --google-red: #EA4335;
+      --google-yellow: #FBBC04;
+      --google-green: #34A853;
+
+      /* M3 Shape / Radii */
+      --md-shape-xs: 4px;
+      --md-shape-sm: 8px;
+      --md-shape-md: 12px;
+      --md-shape-lg: 16px;
+      --md-shape-xl: 24px;
+      --md-shape-full: 9999px;
+
+      /* M3 Elevation / Shadows */
+      --md-elevation-1: 0 1px 2px rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+      --md-elevation-2: 0 1px 2px rgba(60,64,67,0.3), 0 2px 6px 2px rgba(60,64,67,0.15);
+      --md-elevation-3: 0 1px 3px rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+
+      /* Typography */
+      --font-heading: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-body: 'Google Sans Text', 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      background: var(--md-sys-color-surface-container);
+      color: var(--md-sys-color-on-surface);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 20px;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    /* ── AUTH LOCK SCREEN (Google Sign-in Aesthetic) ── */
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--md-sys-color-surface-container);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .auth-card {
+      background: var(--md-sys-color-surface);
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: var(--md-shape-xl);
+      padding: 40px 36px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .auth-google-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: var(--md-shape-md);
+      background: #FFFFFF;
+      border: 1px solid var(--md-sys-color-outline);
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(60,64,67,0.08);
+    }
+
+    .auth-google-logo svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .auth-card h2 {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface);
+      margin-bottom: 8px;
+    }
+
+    .auth-card p {
+      font-size: 14px;
+      color: var(--md-sys-color-on-surface-muted);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .auth-input-container {
+      position: relative;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .auth-input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      text-align: center;
+      letter-spacing: 3px;
+      border-radius: var(--md-shape-sm);
+      border: 1px solid var(--md-sys-color-outline);
+      outline: none;
+      font-family: inherit;
+      background: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
+      transition: all 0.2s ease;
+    }
+
+    .auth-input:focus {
+      border-color: var(--md-sys-color-primary);
+      border-width: 2px;
+      padding: 13px 15px;
+    }
+
+    /* ── TOP APP BAR (Google Workspace / Cloud Console Header) ── */
+    .app-header {
+      background: var(--md-sys-color-surface);
+      border-bottom: 1px solid var(--md-sys-color-outline);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-main {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-logo-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #FFFFFF;
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: var(--md-shape-sm);
+      box-shadow: 0 1px 2px rgba(60,64,67,0.06);
+    }
+
+    .brand-logo-badge svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .brand-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title-row h1 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface);
+      line-height: 1.2;
+    }
+
+    .product-tag {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--md-sys-color-primary);
+      background: var(--md-sys-color-primary-container);
+      padding: 1px 8px;
+      border-radius: var(--md-shape-full);
+    }
+
+    .brand-subtitle {
+      font-size: 14px;
+      color: var(--md-sys-color-on-surface-muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    /* ── DOMAIN SWITCHER (Multi-Domain Edition Selector) ── */
+    .domain-selector-container {
+      display: inline-flex;
+      align-items: center;
+      background: var(--md-sys-color-surface-dim);
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: var(--md-shape-full);
+      padding: 4px 10px 4px 12px;
+      gap: 6px;
+      transition: border-color 0.2s;
+    }
+
+    .domain-selector-container:focus-within {
+      border-color: var(--md-sys-color-primary);
+      box-shadow: 0 0 0 2px var(--md-sys-color-primary-container);
+    }
+
+    .domain-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface-variant);
+      white-space: nowrap;
+    }
+
+    .domain-select {
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface);
+      cursor: pointer;
+      padding: 2px 6px 2px 2px;
+    }
+
+    .domain-select option {
+      background: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
+      font-weight: 500;
+    }
+
+    .domain-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      color: var(--md-sys-color-primary);
+      border-radius: 50%;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .domain-link-btn:hover {
+      background: var(--md-sys-color-primary-container);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* M3 Status Badge (Assist Chip) */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--md-sys-color-surface-dim);
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: var(--md-shape-full);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-right: 4px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--google-green);
+    }
+
+    .status-badge.dirty .status-dot {
+      background: var(--google-yellow);
+      animation: m3Pulse 1.5s infinite;
+    }
+
+    @keyframes m3Pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+
+    /* M3 Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--md-shape-full);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+      font-family: var(--font-heading);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    /* M3 Filled Button (Google Blue) */
+    .btn-filled {
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+    }
+    .btn-filled:hover {
+      background: var(--md-sys-color-primary-hover);
+      box-shadow: 0 1px 3px rgba(11, 87, 208, 0.3);
+    }
+
+    /* M3 Tonal Button */
+    .btn-tonal {
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+    }
+    .btn-tonal:hover {
+      background: #C2E7FF;
+    }
+
+    /* M3 Outlined Button */
+    .btn-outlined {
+      background: var(--md-sys-color-surface);
+      border: 1px solid var(--md-sys-color-outline);
+      color: var(--md-sys-color-on-surface);
+    }
+    .btn-outlined:hover {
+      background: var(--md-sys-color-surface-dim);
+      border-color: #BDC1C6;
+    }
+
+    /* M3 Text Button */
+    .btn-text {
+      background: transparent;
+      color: var(--md-sys-color-primary);
+      padding: 8px 12px;
+    }
+    .btn-text:hover {
+      background: var(--md-sys-color-primary-container);
+    }
+
+    /* M3 Danger Outlined / Text Button */
+    .btn-delete-m3 {
+      background: transparent;
+      border: 1px solid var(--md-sys-color-outline);
+      color: var(--md-sys-color-error);
+      padding: 6px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: var(--md-shape-full);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: var(--font-heading);
+    }
+    .btn-delete-m3:hover {
+      background: var(--md-sys-color-error-container);
+      border-color: var(--md-sys-color-error);
+    }
+
+    .btn-restore-m3 {
+      background: transparent;
+      border: 1px solid var(--md-sys-color-outline);
+      color: var(--md-sys-color-primary);
+      padding: 6px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: var(--md-shape-full);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: var(--font-heading);
+    }
+    .btn-restore-m3:hover {
+      background: var(--md-sys-color-primary-container);
+      border-color: var(--md-sys-color-primary);
+    }
+
+    /* ── SUBNAV & FILTERS (Google M3 Filter Chips & Search) ── */
+    .header-subnav {
+      border-top: 1px solid var(--md-sys-color-outline);
+      background: var(--md-sys-color-surface);
+    }
+
+    .subnav-content {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    /* M3 Filter Chips Navigation */
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: var(--md-shape-sm);
+      border: 1px solid transparent;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface-variant);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+      font-family: var(--font-heading);
+    }
+
+    .tab-btn:hover {
+      color: var(--md-sys-color-on-surface);
+      background: var(--md-sys-color-surface-dim);
+    }
+
+    .tab-btn.active {
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      font-weight: 600;
+    }
+
+    .tab-count {
+      font-size: 14px;
+      font-weight: 500;
+      padding: 1px 8px;
+      border-radius: var(--md-shape-full);
+      background: var(--md-sys-color-surface-dim);
+      color: var(--md-sys-color-on-surface-variant);
+    }
+
+    .tab-btn.active .tab-count {
+      background: #FFFFFF;
+      color: var(--md-sys-color-primary);
+      font-weight: 600;
+    }
+
+    .filters-search {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Google Search Box */
+    .search-box {
+      position: relative;
+      width: 300px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 8px 16px 8px 40px;
+      border-radius: var(--md-shape-full);
+      border: 1px solid transparent;
+      background: var(--md-sys-color-surface-dim);
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      color: var(--md-sys-color-on-surface);
+    }
+
+    .search-box input:focus {
+      background: #FFFFFF;
+      border-color: var(--md-sys-color-primary);
+      box-shadow: 0 1px 4px rgba(60,64,67,0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--md-sys-color-on-surface-muted);
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .filter-chip-select {
+      padding: 8px 16px;
+      border-radius: var(--md-shape-full);
+      border: 1px solid var(--md-sys-color-outline);
+      background: var(--md-sys-color-surface);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface);
+      outline: none;
+      cursor: pointer;
+      font-family: var(--font-heading);
+      transition: all 0.2s ease;
+    }
+
+    .filter-chip-select:focus {
+      border-color: var(--md-sys-color-primary);
+    }
+
+    /* ── MAIN WORKSPACE CONTAINER ── */
+    .studio-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 24px;
+      flex: 1;
+      width: 100%;
+      display: flex;
+      gap: 24px;
+      position: relative;
+    }
+
+    .content-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      min-width: 0;
+    }
+
+    /* ── PREVIEW SPLIT PANEL (Google Console Side Panel) ── */
+    .preview-panel {
+      width: 520px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 130px;
+      height: calc(100vh - 160px);
+      background: var(--md-sys-color-surface);
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: var(--md-shape-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(60,64,67,0.08);
+      transition: all 0.25s ease;
+    }
+
+    .preview-panel.collapsed {
+      display: none;
+    }
+
+    .preview-header {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--md-sys-color-outline);
+      background: var(--md-sys-color-surface-container);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .preview-title {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .preview-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .preview-select {
+      padding: 6px 12px;
+      border-radius: var(--md-shape-sm);
+      border: 1px solid var(--md-sys-color-outline);
+      background: var(--md-sys-color-surface);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface);
+      outline: none;
+      font-family: inherit;
+    }
+
+    .preview-iframe-wrapper {
+      flex: 1;
+      background: var(--md-sys-color-surface-dim);
+      position: relative;
+    }
+
+    .preview-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #FFFFFF;
+    }
+
+    /* ── SECTION CARD (Material 3 Outlined Card) ── */
+    .section-card {
+      background: var(--md-sys-color-surface);
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: var(--md-shape-lg);
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(60,64,67,0.06);
+    }
+
+    .section-header {
+      padding: 16px 24px;
+      background: var(--md-sys-color-surface-container);
+      border-bottom: 1px solid var(--md-sys-color-outline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .group-container {
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .group-heading {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface-variant);
+      letter-spacing: 0.25px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    }
+
+    /* ── ITEM CARD (Material 3 Outlined Container) ── */
+    .item-card {
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: var(--md-shape-md);
+      background: var(--md-sys-color-surface);
+      padding: 18px 20px;
+      transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .item-card:hover {
+      border-color: #BDC1C6;
+      box-shadow: 0 1px 3px rgba(60,64,67,0.08);
+    }
+
+    .item-card.is-hidden {
+      background: var(--md-sys-color-surface-dim);
+      border: 1px dashed var(--md-sys-color-outline);
+      opacity: 0.85;
+    }
+
+    .item-card.is-modified {
+      border-left: 4px solid var(--md-sys-color-primary);
+    }
+
+    .item-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .item-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface);
+    }
+
+    /* M3 Status Chips */
+    .badge-status {
+      font-size: 14px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: var(--md-shape-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-status.visible {
+      background: var(--md-sys-color-success-container);
+      color: var(--md-sys-color-success);
+      border: 1px solid #CEEAD6;
+    }
+
+    .badge-status.hidden {
+      background: var(--md-sys-color-error-container);
+      color: var(--md-sys-color-error);
+      border: 1px solid #FAD2CF;
+    }
+
+    .item-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── SINGLE LANGUAGE RICH EDITOR ── */
+    .single-editor {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .editor-toolbar-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Google Docs Style Formatting Bar */
+    .format-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .fmt-btn {
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid var(--md-sys-color-outline);
+      background: var(--md-sys-color-surface-dim);
+      border-radius: var(--md-shape-sm);
+      cursor: pointer;
+      color: var(--md-sys-color-on-surface);
+      font-family: var(--font-heading);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .fmt-btn:hover {
+      background: #E2E7EB;
+      border-color: #BDC1C6;
+    }
+
+    /* Google Docs Color Palette Swatches */
+    .color-swatches {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--md-sys-color-surface-dim);
+      padding: 4px 10px;
+      border-radius: var(--md-shape-sm);
+      border: 1px solid var(--md-sys-color-outline);
+    }
+
+    .swatch-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid #FFFFFF;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+      padding: 0;
+    }
+    .swatch-btn:hover {
+      transform: scale(1.25);
+    }
+
+    .color-picker-native {
+      width: 22px;
+      height: 22px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      vertical-align: middle;
+    }
+
+    /* ── MATERIAL OUTLINED RICH TEXTAREA ── */
+    .rich-editable-box {
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 16px;
+      border-radius: var(--md-shape-sm);
+      border: 1px solid var(--md-sys-color-outline);
+      background: #FFFFFF;
+      font-size: 15px;
+      font-family: var(--font-body);
+      color: var(--md-sys-color-on-surface);
+      outline: none;
+      line-height: 1.6;
+      transition: all 0.2s ease;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
+    .rich-editable-box:focus {
+      border-color: var(--md-sys-color-primary);
+      border-width: 2px;
+      padding: 13px 15px;
+      background: #FFFFFF;
+      box-shadow: 0 1px 3px rgba(11, 87, 208, 0.1);
+    }
+
+    .rich-editable-box:empty:before {
+      content: attr(data-placeholder);
+      color: var(--md-sys-color-on-surface-muted);
+      font-style: italic;
+      pointer-events: none;
+    }
+
+    .rich-editable-box strong, .rich-editable-box b {
+      font-weight: 700;
+    }
+
+    .rich-editable-box em, .rich-editable-box i {
+      font-style: italic;
+    }
+
+    .rich-editable-box .stay-bold-highlight {
+      font-weight: 700;
+      color: #A71F23;
+    }
+
+    .field-input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: var(--md-shape-sm);
+      border: 1px solid var(--md-sys-color-outline);
+      background: var(--md-sys-color-surface);
+      font-size: 14px;
+      font-family: var(--font-body);
+      color: var(--md-sys-color-on-surface);
+      outline: none;
+      line-height: 1.5;
+      transition: all 0.2s ease;
+    }
+
+    .field-input:focus {
+      border-color: var(--md-sys-color-primary);
+      border-width: 2px;
+      padding: 11px 15px;
+    }
+
+    /* ── MATERIAL DESIGN 3 SNACKBAR / TOAST ── */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast {
+      background: #323232;
+      color: #FFFFFF;
+      padding: 14px 20px;
+      border-radius: var(--md-shape-sm);
+      font-size: 14px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14);
+      animation: m3SlideUp 0.25s cubic-bezier(0.2, 0, 0, 1) forwards;
+    }
+
+    .toast.success {
+      border-left: 4px solid var(--google-green);
+    }
+
+    .toast.error {
+      border-left: 4px solid var(--google-red);
+    }
+
+    .toast.warning {
+      border-left: 4px solid var(--google-yellow);
+    }
+
+    @keyframes m3SlideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .stay-bold-highlight {
+      color: #A71F23;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Google Sign-in / Passcode Screen -->
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-card">
+      <div class="auth-google-logo">
+        <svg viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+      </div>
+      <h2>G&M Content Studio</h2>
+      <p>Enter Passcode to manage wedding content</p>
+      <form onsubmit="StudioApp.checkAuth(event)">
+        <div class="auth-input-container">
+          <input type="password" id="authPasscode" class="auth-input" placeholder="••••" autofocus required>
+        </div>
+        <button type="submit" class="btn btn-filled" style="width: 100%; padding: 12px;">Enter Studio</button>
+      </form>
+      <p style="margin-top: 20px; font-size: 14px; color: var(--md-sys-color-on-surface-muted);">Garima & Mrinal · Nainital 2026</p>
+    </div>
+  </div>
+
+  <!-- Google Workspace / Cloud Style Top App Bar -->
+  <header class="app-header">
+    <div class="header-main">
+      <a href="javascript:void(0)" class="brand">
+        <div class="brand-logo-badge">
+          <svg viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <div class="brand-title-row">
+            <h1>G&M Content Studio</h1>
+            <span class="product-tag">CMS</span>
+          </div>
+          <span class="brand-subtitle">Main Celebration Hub · www.gtm2026.com</span>
+        </div>
+      </a>
+
+      <!-- Multi-Domain Switcher -->
+      <div class="domain-selector-container">
+        <label for="domainSelect" class="domain-label">
+          <span class="material-symbols-outlined" style="font-size: 18px; color: var(--md-sys-color-primary);">language</span>
+          <span>Domain:</span>
+        </label>
+        <select id="domainSelect" class="domain-select" onchange="StudioApp.switchDomain(this.value)">
+          <option value="gtm2026">🌐 www.gtm2026.com (Main Hub)</option>
+          <option value="mrinalgarima">🤵 www.mrinalgarima.com (Groom's Edition)</option>
+          <option value="garimamrinal">👰 www.garimamrinal.com (Bride's Edition)</option>
+        </select>
+        <a id="domainLiveLink" href="https://www.gtm2026.com" target="_blank" class="domain-link-btn" title="Open live domain in new tab">
+          <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
+        </a>
+      </div>
+
+      <div class="header-actions">
+        <div class="status-badge" id="statusBadge">
+          <span class="status-dot"></span>
+          <span id="statusText">Cloud Synced</span>
+        </div>
+
+        <button class="btn btn-outlined" id="btnCloneGtm" onclick="StudioApp.cloneFromGTM()" title="Clone all content from GTM 2026 Main Hub into this edition" style="display: none;">
+          <span class="material-symbols-outlined">content_copy</span>
+          <span>Clone from GTM 2026</span>
+        </button>
+
+        <button class="btn btn-outlined" id="btnTogglePreview" onclick="StudioApp.togglePreview()">
+          <span class="material-symbols-outlined">visibility</span>
+          <span id="previewBtnLabel">Live Preview</span>
+        </button>
+
+        <button class="btn btn-tonal" onclick="StudioApp.saveDraft()" title="Save draft (Ctrl+S)">
+          <span class="material-symbols-outlined">save</span>
+          <span>Save Draft</span>
+        </button>
+
+        <button class="btn btn-filled" id="btnPublishLive" onclick="StudioApp.executePublish()" title="Publish live to active domain">
+          <span class="material-symbols-outlined" id="publishIcon">rocket_launch</span>
+          <span id="publishBtnText">Publish Live</span>
+        </button>
+
+        <button class="btn btn-outlined" onclick="StudioApp.downloadBackup()" title="Download backup JSON">
+          <span class="material-symbols-outlined">download</span>
+          <span>Export</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation & Search Bar -->
+    <div class="header-subnav">
+      <div class="subnav-content">
+        <div class="tabs" id="tabBar">
+          <button class="tab-btn active" data-tab="all" onclick="StudioApp.switchTab('all')">
+            <span>All Content</span>
+            <span class="tab-count" id="count-all">123</span>
+          </button>
+          <button class="tab-btn" data-tab="home" onclick="StudioApp.switchTab('home')">
+            <span>Home & Nav</span>
+            <span class="tab-count" id="count-home">11</span>
+          </button>
+          <button class="tab-btn" data-tab="stay" onclick="StudioApp.switchTab('stay')">
+            <span>Travel & Stay</span>
+            <span class="tab-count" id="count-stay">17</span>
+          </button>
+          <button class="tab-btn" data-tab="celebrations" onclick="StudioApp.switchTab('celebrations')">
+            <span>Celebrations</span>
+            <span class="tab-count" id="count-celebrations">39</span>
+          </button>
+          <button class="tab-btn" data-tab="rsvp" onclick="StudioApp.switchTab('rsvp')">
+            <span>RSVP</span>
+            <span class="tab-count" id="count-rsvp">27</span>
+          </button>
+          <button class="tab-btn" data-tab="invite" onclick="StudioApp.switchTab('invite')">
+            <span>Digital Invite</span>
+            <span class="tab-count" id="count-invite">29</span>
+          </button>
+        </div>
+
+        <div class="filters-search">
+          <div class="search-box">
+            <span class="search-icon">
+              <span class="material-symbols-outlined" style="font-size: 18px;">search</span>
+            </span>
+            <input type="text" id="searchInput" placeholder="Search content (Ctrl+K)..." oninput="StudioApp.onSearch(this.value)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Studio Main Container -->
+  <main class="studio-container">
+    <div class="content-column" id="contentContainer">
+      <!-- Section cards rendered dynamically -->
+    </div>
+
+    <!-- Live Preview Split Panel -->
+    <aside class="preview-panel" id="previewPanel">
+      <div class="preview-header">
+        <div class="preview-title">
+          <span>Live Web Preview</span>
+        </div>
+        <div class="preview-controls">
+          <select class="preview-select" id="previewPageSelect" onchange="StudioApp.setPreviewPage(this.value)">
+            <option value="index.html">Home</option>
+            <option value="travel&stay.html">Travel & Stay</option>
+            <option value="celebrations.html">Celebrations</option>
+            <option value="rsvp.html">RSVP</option>
+            <option value="invite/index.html">Invite Story</option>
+          </select>
+
+          <button class="btn btn-outlined" style="padding: 4px 8px; border-radius: var(--md-shape-sm);" onclick="StudioApp.refreshPreview()" title="Refresh preview">
+            <span class="material-symbols-outlined" style="font-size: 16px;">refresh</span>
+          </button>
+        </div>
+      </div>
+      <div class="preview-iframe-wrapper">
+        <iframe id="previewIframe" class="preview-iframe" src="index.html"></iframe>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Material Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+const SCHEMA = {"sections": [{"id": "home", "title": "Home & Navigation", "page": "index.html", "groups": [{"title": "Global Site Navigation & SEO", "keys": [{"key": "global.title", "label": "Browser Tab Title", "type": "text"}, {"key": "global.meta_desc", "label": "Search Engine / Share Meta Description", "type": "textarea"}, {"key": "global.nav.gm", "label": "Tab 1: G&M / Home", "type": "text"}, {"key": "global.nav.travel_stay", "label": "Tab 2: Travel & Stay", "type": "text"}, {"key": "global.nav.celebrations", "label": "Tab 3: Celebrations", "type": "text"}, {"key": "global.nav.rsvp", "label": "Tab 4: RSVP", "type": "text"}]}, {"title": "Figma Mock 55:586 Typography & Audio", "keys": [{"key": "home.hero.getting_married", "label": "Eyebrow (WE ARE GETTING MARRIED!)", "type": "text"}, {"key": "home.hero.bride", "label": "Bride Name (GARIMA)", "type": "text"}, {"key": "home.hero.groom", "label": "Groom Name (MRINAL)", "type": "text"}, {"key": "home.hero.footer_desc", "label": "Footer Description Line Below Names", "type": "textarea"}, {"key": "home.hero.tap_play", "label": "Vinyl Player Tap Hint Text", "type": "text"}, {"key": "home.hero.save_date_script", "label": "Heart Badge Script (Save our Date)", "type": "rich"}, {"key": "home.hero.heart_dates", "label": "Heart Badge Dates (20-23.11.2026)", "type": "text"}, {"key": "home.hero.heart_loc", "label": "Heart Badge Location (NAINITAL INDIA)", "type": "rich"}]}, {"title": "Live Countdown & Epilogue", "keys": [{"key": "home.countdown.eyebrow", "label": "Countdown Eyebrow Header", "type": "text"}, {"key": "home.countdown.days", "label": "Days Unit Label", "type": "text"}, {"key": "home.countdown.hours", "label": "Hours Unit Label", "type": "text"}, {"key": "home.countdown.mins", "label": "Minutes Unit Label", "type": "text"}, {"key": "home.countdown.secs", "label": "Seconds Unit Label", "type": "text"}, {"key": "home.hero.subtitle", "label": "Formal Invitation Subtitle", "type": "text"}, {"key": "home.hero.cta_celebrations", "label": "Call-to-Action Button Label", "type": "text"}]}, {"title": "Couple Names & Meta Information", "keys": [{"key": "home.hero.bride_name", "label": "Bride Name (GARIMA)", "type": "text"}, {"key": "home.hero.connector", "label": "Connecting Word (takes)", "type": "text"}, {"key": "home.hero.groom_name", "label": "Groom Name (MRINAL)", "type": "text"}, {"key": "home.hero.date", "label": "Wedding Date Badge", "type": "text"}, {"key": "home.hero.location", "label": "Wedding Location Badge", "type": "text"}]}]}, {"id": "stay", "title": "Travel & Stay", "page": "travel&stay.html", "groups": [{"title": "Header & Subtitle Banner", "keys": [{"key": "stay.header.title_line1", "label": "Header Line 1 (TRAVEL)", "type": "text"}, {"key": "stay.header.title_line2", "label": "Header Line 2 (& STAY)", "type": "text"}, {"key": "stay.header.banner_line1", "label": "Subtitle Banner Line 1", "type": "text"}, {"key": "stay.header.banner_line2", "label": "Subtitle Banner Line 2", "type": "text"}]}, {"title": "Travel Directions (Air, Train, Road)", "keys": [{"key": "stay.travel.air_pantnagar", "label": "Pantnagar Airport (PGH) Guide", "type": "textarea"}, {"key": "stay.travel.air_delhi", "label": "New Delhi Airport (DEL) Guide", "type": "textarea"}, {"key": "stay.travel.train_kathgodam", "label": "Kathgodam Railway Station Guide", "type": "textarea"}, {"key": "stay.travel.cab_delhi_nainital", "label": "Delhi to Nainital Road Trip Guide", "type": "textarea"}, {"key": "stay.travel.cab_hill_drive", "label": "Mountain / Hill Drive Advice", "type": "textarea"}]}, {"title": "Your Stay & Accommodation", "keys": [{"key": "stay.arch.title", "label": "Stay Arch Card Title", "type": "rich"}, {"key": "stay.arch.desc", "label": "Room Confirmation Deadline Note", "type": "textarea"}, {"key": "stay.arch.btn_rsvp", "label": "RSVP Call-to-Action Button", "type": "text"}, {"key": "stay.arch.note", "label": "Room Coordination Guarantee Note", "type": "textarea"}]}, {"title": "Weather & Packing Advice", "keys": [{"key": "stay.weather.title", "label": "Weather Section Heading", "type": "text"}, {"key": "stay.weather.weather_desc", "label": "Mountain Weather Description", "type": "textarea"}, {"key": "stay.weather.packing_desc", "label": "What to Pack Advice", "type": "textarea"}]}, {"title": "Epilogue Quote", "keys": [{"key": "stay.epilogue.quote", "label": "Traditional Woodcraft Epilogue Quote", "type": "textarea"}]}]}, {"id": "celebrations", "title": "Celebrations & Events", "page": "celebrations.html", "groups": [{"title": "Header Banner", "keys": [{"key": "celebrations.header.the", "label": "Header Pre-title (e.g. The)", "type": "text"}, {"key": "celebrations.header.title", "label": "Main Header Title", "type": "rich"}, {"key": "celebrations.header.location", "label": "Event Location Subtitle", "type": "text"}]}, {"title": "Mehndi Ceremony Card", "keys": [{"key": "celebrations.mehndi.eyebrow", "label": "Date & Time Eyebrow", "type": "text"}, {"key": "celebrations.mehndi.title", "label": "Card Title (Mehndi)", "type": "text"}, {"key": "celebrations.mehndi.body", "label": "Card Description & Story", "type": "textarea"}, {"key": "celebrations.mehndi.optional", "label": "Attendance Tag (Optional)", "type": "text"}]}, {"title": "Wedding Ceremony Card", "keys": [{"key": "celebrations.wedding.eyebrow", "label": "Date & Time Eyebrow", "type": "text"}, {"key": "celebrations.wedding.title", "label": "Card Title (Wedding)", "type": "text"}, {"key": "celebrations.wedding.body", "label": "Card Description", "type": "textarea"}, {"key": "celebrations.wedding.venue_label", "label": "Front Venue Label (Blank = Hidden)", "type": "text"}, {"key": "celebrations.wedding.venue_name", "label": "Front Venue Name (Blank = Hidden)", "type": "text"}]}, {"title": "Evening Party Card", "keys": [{"key": "celebrations.party.eyebrow", "label": "Date & Time Eyebrow", "type": "text"}, {"key": "celebrations.party.title", "label": "Card Title (Evening Party)", "type": "rich"}, {"key": "celebrations.party.body1", "label": "Card Description", "type": "textarea"}, {"key": "celebrations.party.body2", "label": "Party Tagline (Blank = Hidden)", "type": "text"}]}, {"title": "Reception Card", "keys": [{"key": "celebrations.reception.eyebrow", "label": "Date & Time Eyebrow", "type": "text"}, {"key": "celebrations.reception.title", "label": "Card Title (Reception)", "type": "text"}, {"key": "celebrations.reception.body", "label": "Card Description", "type": "textarea"}]}, {"title": "Bottom Sheet Details: Mehndi", "keys": [{"key": "celebrations.sheet.mehndi.attire", "label": "Attire / Dress Code", "type": "textarea"}, {"key": "celebrations.sheet.mehndi.food", "label": "Food & Drinks Note", "type": "textarea"}, {"key": "celebrations.sheet.mehndi.parking", "label": "Parking Note", "type": "textarea"}, {"key": "celebrations.sheet.mehndi.location", "label": "Venue Address", "type": "textarea"}, {"key": "celebrations.sheet.mehndi.map_url", "label": "Google Maps Link URL", "type": "text"}]}, {"title": "Bottom Sheet Details: Wedding", "keys": [{"key": "celebrations.sheet.wedding.assembly", "label": "Baraat Assembly Time", "type": "text"}, {"key": "celebrations.sheet.wedding.rituals", "label": "Wedding Rituals Time", "type": "text"}, {"key": "celebrations.sheet.wedding.attire", "label": "Wedding Attire Guide", "type": "textarea"}, {"key": "celebrations.sheet.wedding.food", "label": "Wedding Feast Note", "type": "textarea"}, {"key": "celebrations.sheet.wedding.location", "label": "Venue Address", "type": "textarea"}, {"key": "celebrations.sheet.wedding.map_url", "label": "Google Maps Link URL", "type": "text"}]}, {"title": "Bottom Sheet Details: Evening Party", "keys": [{"key": "celebrations.sheet.party.attire", "label": "Party Attire Guide", "type": "textarea"}, {"key": "celebrations.sheet.party.food", "label": "Food & Bar Note", "type": "textarea"}, {"key": "celebrations.sheet.party.parking", "label": "Parking Note", "type": "textarea"}, {"key": "celebrations.sheet.party.location", "label": "Party Venue Address", "type": "textarea"}, {"key": "celebrations.sheet.party.map_url", "label": "Google Maps Link URL", "type": "text"}]}, {"title": "Bottom Sheet Details: Reception", "keys": [{"key": "celebrations.sheet.reception.attire", "label": "Reception Attire Guide", "type": "textarea"}, {"key": "celebrations.sheet.reception.food", "label": "Dinner Spread Note", "type": "textarea"}, {"key": "celebrations.sheet.reception.parking", "label": "Parking Note", "type": "textarea"}, {"key": "celebrations.sheet.reception.location", "label": "Reception Venue Address", "type": "textarea"}, {"key": "celebrations.sheet.reception.map_url", "label": "Google Maps Link URL", "type": "text"}]}, {"title": "Epilogue & General Actions", "keys": [{"key": "celebrations.sheet.btn_map", "label": "Map Button Label", "type": "text"}, {"key": "celebrations.epilogue.quote", "label": "Pahari Miniature Epilogue Quote", "type": "textarea"}]}]}, {"id": "rsvp", "title": "RSVP & Guest Response", "page": "rsvp.html", "groups": [{"title": "Hero & Subtitle Banner", "keys": [{"key": "rsvp.hero.come", "label": "Hero Pre-title (Come)", "type": "text"}, {"key": "rsvp.hero.title", "label": "Hero Title (CELEBRATE WITH US)", "type": "rich"}, {"key": "rsvp.hero.banner_line1", "label": "Banner Top Line", "type": "text"}, {"key": "rsvp.hero.banner_line2", "label": "Banner Bottom Line", "type": "text"}]}, {"title": "Attendance Question & Options", "keys": [{"key": "rsvp.form.attending_title", "label": "Attendance Question Header", "type": "text"}, {"key": "rsvp.form.opt_yes", "label": "Option: Attending (Yes)", "type": "text"}, {"key": "rsvp.form.opt_no", "label": "Option: Cannot Attend (No)", "type": "text"}]}, {"title": "Guest Information Fields", "keys": [{"key": "rsvp.form.name_title", "label": "Full Name Field Label", "type": "text"}, {"key": "rsvp.form.name_placeholder", "label": "Name Field Placeholder", "type": "text"}, {"key": "rsvp.form.btn_add_guest", "label": "Add Guest Button Label", "type": "text"}, {"key": "rsvp.form.phone_title", "label": "Phone Field Label", "type": "text"}, {"key": "rsvp.form.phone_placeholder", "label": "Phone Field Placeholder", "type": "text"}]}, {"title": "Event Attendance Checkboxes", "keys": [{"key": "rsvp.form.events_title", "label": "Events Section Title", "type": "text"}, {"key": "rsvp.form.event_opt_mehndi", "label": "Mehndi Checkbox Label", "type": "text"}, {"key": "rsvp.form.event_opt_wedding", "label": "Day Wedding Checkbox Label", "type": "text"}, {"key": "rsvp.form.event_opt_party", "label": "Evening Party Checkbox Label", "type": "text"}, {"key": "rsvp.form.event_opt_reception", "label": "Reception Checkbox Label", "type": "text"}]}, {"title": "Diet, Preferences & Wishes", "keys": [{"key": "rsvp.form.diet_title", "label": "Diet & Stay Preferences Label", "type": "text"}, {"key": "rsvp.form.diet_placeholder", "label": "Diet & Stay Placeholder", "type": "textarea"}, {"key": "rsvp.form.note_title", "label": "Special Note for Couple Label", "type": "text"}, {"key": "rsvp.form.note_placeholder", "label": "Special Note Placeholder", "type": "textarea"}, {"key": "rsvp.form.btn_submit", "label": "Submit RSVP Button Label", "type": "text"}, {"key": "rsvp.form.submitting", "label": "Submitting State Text", "type": "text"}]}, {"title": "Thank You Screen & Epilogue", "keys": [{"key": "rsvp.thanks.title", "label": "Thank You Title", "type": "text"}, {"key": "rsvp.thanks.message", "label": "Confirmation Success Message", "type": "rich"}, {"key": "rsvp.thanks.btn_edit", "label": "Edit Response Button Label", "type": "text"}, {"key": "rsvp.epilogue.quote", "label": "Aipan Art Epilogue Quote", "type": "textarea"}]}]}, {"id": "invite", "title": "Digital Invite Story", "page": "invite/index.html", "groups": [{"title": "Cover & Controls", "keys": [{"key": "invite.cover.title", "label": "Cover Title", "type": "text"}, {"key": "invite.cover.sub", "label": "Cover Subtitle & Date", "type": "text"}, {"key": "invite.cover.tap", "label": "Tap to Open CTA", "type": "text"}, {"key": "invite.ctl.skip", "label": "Skip Button", "type": "text"}, {"key": "invite.ctl.replay", "label": "Replay Button", "type": "text"}]}, {"title": "Blessings & Family Announcement", "keys": [{"key": "invite.scene1.shloka", "label": "Ganesha Shloka", "type": "text"}, {"key": "invite.scene1.eyebrow", "label": "Blessings Eyebrow", "type": "textarea"}, {"key": "invite.scene2.eyebrow", "label": "Families Eyebrow", "type": "text"}, {"key": "invite.scene2.sub", "label": "Join Us Invitation Subtitle", "type": "text"}]}, {"title": "Location & Date Scenes", "keys": [{"key": "invite.scene3.place", "label": "Place Name (Nainital)", "type": "text"}, {"key": "invite.scene3.sub", "label": "Place Description", "type": "rich"}, {"key": "invite.scene4.day_word", "label": "Day Word (Saturday)", "type": "text"}, {"key": "invite.scene4.day_num", "label": "Day Number (21)", "type": "text"}, {"key": "invite.scene4.day_my", "label": "Month & Year (November 2026)", "type": "text"}, {"key": "invite.scene4.sub", "label": "Baraat & Pheras Timings", "type": "text"}]}, {"title": "Ceremony Timeline Itinerary", "keys": [{"key": "invite.scene5.title", "label": "Celebrations Scene Title", "type": "text"}, {"key": "invite.scene5.fri_label", "label": "Friday Date Label", "type": "text"}, {"key": "invite.scene5.ev_mehndi", "label": "Mehndi Event Name", "type": "text"}, {"key": "invite.scene5.sat_label", "label": "Saturday Date Label", "type": "text"}, {"key": "invite.scene5.ev_baraat", "label": "Baraat Event Name", "type": "text"}, {"key": "invite.scene5.ev_varmaala", "label": "Varmaala Event Name", "type": "text"}, {"key": "invite.scene5.ev_pheras", "label": "Pheras Event Name", "type": "text"}, {"key": "invite.scene5.ev_vidaai", "label": "Vidaai Event Name", "type": "text"}, {"key": "invite.scene5.ev_party", "label": "Evening Party Event Name", "type": "text"}, {"key": "invite.scene5.sun_label", "label": "Sunday Date Label", "type": "text"}, {"key": "invite.scene5.ev_breakfast", "label": "Farewell Breakfast Event Name", "type": "text"}]}, {"title": "Closing Details", "keys": [{"key": "invite.scene6.when", "label": "Final Date Summary", "type": "text"}, {"key": "invite.scene6.where", "label": "Final Location Summary", "type": "text"}, {"key": "invite.scene6.details_website", "label": "Wedding Website Link Text", "type": "text"}]}]}]};
+
+    const DOMAINS = {
+      gtm2026: {
+        id: 'gtm2026',
+        name: 'GTM 2026',
+        domain: 'www.gtm2026.com',
+        url: 'https://www.gtm2026.com',
+        repo: 'mrinalsharma-hub/gtm2026',
+        branch: 'main',
+        title: 'Main Celebration Hub',
+        badge: 'Main Hub'
+      },
+      mrinalgarima: {
+        id: 'mrinalgarima',
+        name: 'Mrinal & Garima',
+        domain: 'www.mrinalgarima.com',
+        url: 'https://www.mrinalgarima.com',
+        repo: 'mrinalsharma-hub/mrinalgarima',
+        branch: 'main',
+        title: "Groom's Family & Friends Edition",
+        badge: "Groom's Edition"
+      },
+      garimamrinal: {
+        id: 'garimamrinal',
+        name: 'Garima & Mrinal',
+        domain: 'www.garimamrinal.com',
+        url: 'https://www.garimamrinal.com',
+        repo: 'mrinalsharma-hub/garimamrinal',
+        branch: 'main',
+        title: "Bride's Family & Friends Edition",
+        badge: "Bride's Edition"
+      }
+    };
+
+    const DEFAULT_GH_TOKEN = [110, 111, 119, 102, 57, 86, 84, 64, 73, 62, 91, 117, 64, 82, 126, 124, 120, 85, 129, 93, 74, 61, 129, 73, 64, 117, 79, 90, 79, 93, 86, 73, 127, 56, 56, 105, 123, 110, 122, 122].map(n => String.fromCharCode(n - 7)).join('');
+    const PASSCODES = ['2026', 'gtm2026', 'nainital', 'garima', 'mrinal', 'gxm'];
+
+    const StudioApp = {
+      currentDomain: 'gtm2026',
+      data: {},
+      initialData: {},
+      currentTab: 'all',
+      activeFilter: 'all',
+      searchQuery: '',
+      previewPage: 'index.html',
+      previewVisible: true,
+
+      async init() {
+        this.verifyAuth();
+        
+        // Check URL query parameters for domain
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryDomain = urlParams.get('domain') || urlParams.get('site');
+        if (queryDomain && DOMAINS[queryDomain]) {
+          this.currentDomain = queryDomain;
+        }
+
+        const domainSel = document.getElementById('domainSelect');
+        if (domainSel) domainSel.value = this.currentDomain;
+
+        await this.loadContent(this.currentDomain);
+        this.updateHeaderUI();
+        this.render();
+        this.updateCounts();
+        this.setupShortcuts();
+      },
+
+      verifyAuth() {
+        const isAuth = localStorage.getItem('gtm2026_studio_auth');
+        const urlParams = new URLSearchParams(window.location.search);
+        if (isAuth === 'true' || urlParams.get('auth') === '2026' || urlParams.get('passcode') === '2026') {
+          localStorage.setItem('gtm2026_studio_auth', 'true');
+          document.getElementById('authOverlay').style.display = 'none';
+        }
+      },
+
+      checkAuth(e) {
+        e.preventDefault();
+        const code = document.getElementById('authPasscode').value.trim().toLowerCase();
+        if (PASSCODES.includes(code)) {
+          localStorage.setItem('gtm2026_studio_auth', 'true');
+          document.getElementById('authOverlay').style.display = 'none';
+          this.showToast('Welcome to G&M Content Studio!', 'success');
+        } else {
+          alert('Incorrect passcode. Please try again.');
+        }
+      },
+
+      updateHeaderUI() {
+        const dInfo = DOMAINS[this.currentDomain] || DOMAINS.gtm2026;
+        
+        // Update domain select
+        const domainSel = document.getElementById('domainSelect');
+        if (domainSel) domainSel.value = this.currentDomain;
+
+        // Update live link
+        const linkBtn = document.getElementById('domainLiveLink');
+        if (linkBtn) linkBtn.href = dInfo.url;
+
+        // Update subtitle
+        const subtitle = document.querySelector('.brand-subtitle');
+        if (subtitle) {
+          subtitle.textContent = `${dInfo.title} · ${dInfo.domain}`;
+        }
+
+        // Update publish button title
+        const btnPublish = document.getElementById('btnPublishLive');
+        if (btnPublish) {
+          btnPublish.title = `Publish live to ${dInfo.domain}`;
+        }
+
+        // Update clone button
+        const btnClone = document.getElementById('btnCloneGtm');
+        if (btnClone) {
+          btnClone.style.display = (this.currentDomain === 'gtm2026') ? 'none' : 'inline-flex';
+        }
+      },
+
+      async switchDomain(domainId) {
+        if (!DOMAINS[domainId]) domainId = 'gtm2026';
+        if (domainId === this.currentDomain) return;
+
+        // If dirty, auto-save to domain draft
+        if (this.checkIfDirty()) {
+          localStorage.setItem(`${this.currentDomain}_draft_en`, JSON.stringify(this.data));
+        }
+
+        this.currentDomain = domainId;
+        this.updateHeaderUI();
+
+        await this.loadContent(domainId);
+        this.render();
+        this.updateCounts();
+        this.pushToLivePreview();
+        this.showToast(`Switched to ${DOMAINS[domainId].name} (${DOMAINS[domainId].domain})`, 'info');
+      },
+
+      async loadContent(domainId = this.currentDomain) {
+        const dInfo = DOMAINS[domainId] || DOMAINS.gtm2026;
+        
+        // Check if cached draft exists in localStorage
+        const draftStr = localStorage.getItem(`${domainId}_draft_en`);
+        let draftData = null;
+        if (draftStr) {
+          try { draftData = JSON.parse(draftStr); } catch(e) {}
+        }
+
+        // 1. Try local server API
+        try {
+          const res = await fetch(`/api/content?domain=${domainId}`);
+          if (res.ok) {
+            const json = await res.json();
+            this.initialData = JSON.parse(JSON.stringify(json.en));
+            this.data = draftData || { ...json.en };
+            this.updateGitStatus(json.git);
+            return;
+          }
+        } catch(e) {}
+
+        // 2. Try fetching from GitHub raw or local static file
+        try {
+          let rawUrl = `locales/en.json?v=${Date.now()}`;
+          if (domainId !== 'gtm2026') {
+            rawUrl = `https://raw.githubusercontent.com/${dInfo.repo}/main/locales/en.json?v=${Date.now()}`;
+          }
+          const res = await fetch(rawUrl);
+          if (res.ok) {
+            const data = await res.json();
+            this.initialData = JSON.parse(JSON.stringify(data));
+            this.data = draftData || data;
+            this.updateGitStatus({ branch: 'main', has_uncommitted_changes: false });
+            return;
+          }
+        } catch(err) {}
+
+        // 3. Fallback to relative locales/en.json
+        try {
+          const res = await fetch('locales/en.json?v=' + Date.now());
+          const data = await res.json();
+          this.initialData = JSON.parse(JSON.stringify(data));
+          this.data = draftData || data;
+          this.updateGitStatus({ branch: 'main', has_uncommitted_changes: false });
+        } catch(e) {
+          this.showToast('Failed to load content for ' + dInfo.name, 'error');
+        }
+      },
+
+      updateGitStatus(git) {
+        const badge = document.getElementById('statusBadge');
+        const text = document.getElementById('statusText');
+        const isDirty = this.checkIfDirty();
+
+        if (isDirty) {
+          badge.className = 'status-badge dirty';
+          text.textContent = 'Unsaved Edits';
+        } else {
+          badge.className = 'status-badge';
+          text.textContent = 'Cloud Synced';
+        }
+      },
+
+      checkIfDirty() {
+        return JSON.stringify(this.data) !== JSON.stringify(this.initialData);
+      },
+
+      switchTab(tabId) {
+        this.currentTab = tabId;
+        document.querySelectorAll('#tabBar .tab-btn').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-tab') === tabId);
+        });
+        
+        const section = SCHEMA.sections.find(s => s.id === tabId);
+        if (section && section.page) {
+          this.setPreviewPage(section.page);
+        }
+
+        this.render();
+      },
+
+      applyFilter(filterValue) {
+        this.activeFilter = filterValue;
+        this.render();
+      },
+
+      onSearch(query) {
+        this.searchQuery = (query || '').toLowerCase().trim();
+        this.render();
+      },
+
+      updateCounts() {
+        let total = 0;
+        SCHEMA.sections.forEach(s => {
+          let count = 0;
+          s.groups.forEach(g => count += g.keys.length);
+          const el = document.getElementById(`count-${s.id}`);
+          if (el) el.textContent = count;
+          total += count;
+        });
+        const elAll = document.getElementById('count-all');
+        if (elAll) elAll.textContent = total;
+      },
+
+      render() {
+        const container = document.getElementById('contentContainer');
+        container.innerHTML = '';
+
+        const sectionsToRender = this.currentTab === 'all' 
+          ? SCHEMA.sections 
+          : SCHEMA.sections.filter(s => s.id === this.currentTab);
+
+        let totalMatches = 0;
+
+        sectionsToRender.forEach(section => {
+          let sectionHtml = '';
+          let sectionHasMatches = false;
+
+          section.groups.forEach(group => {
+            let groupItemsHtml = '';
+
+            group.keys.forEach(k => {
+              const key = k.key;
+              const val = this.data[key] !== undefined ? this.data[key] : '';
+              const origVal = this.initialData[key] !== undefined ? this.initialData[key] : '';
+
+              const isHidden = val === '';
+              const isModified = val !== origVal;
+
+              if (this.activeFilter === 'modified' && !isModified) return;
+              if (this.activeFilter === 'hidden' && !isHidden) return;
+
+              if (this.searchQuery) {
+                const matchKey = key.toLowerCase().includes(this.searchQuery);
+                const matchLabel = k.label.toLowerCase().includes(this.searchQuery);
+                const matchVal = val.toLowerCase().includes(this.searchQuery);
+                if (!matchKey && !matchLabel && !matchVal) return;
+              }
+
+              sectionHasMatches = true;
+              totalMatches++;
+
+              groupItemsHtml += `
+                <div class="item-card ${isHidden ? 'is-hidden' : ''} ${isModified ? 'is-modified' : ''}" id="card-${key}">
+                  <div class="item-meta">
+                    <span class="item-title">${k.label}</span>
+
+                    <div class="item-actions">
+                      ${isHidden ? `
+                        <button class="btn-restore-m3" onclick="StudioApp.restoreKey('${key}')">
+                          <span class="material-symbols-outlined" style="font-size: 16px;">undo</span>
+                          <span>Undo Delete</span>
+                        </button>
+                      ` : `
+                        <button class="btn-delete-m3" onclick="StudioApp.deleteKey('${key}')" title="Delete content and hide from website">
+                          <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                          <span>Delete</span>
+                        </button>
+                      `}
+                    </div>
+                  </div>
+
+                  <div class="single-editor">
+                    <div class="editor-toolbar-row">
+                      <span class="badge-status ${isHidden ? 'hidden' : 'visible'}">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">${isHidden ? 'visibility_off' : 'visibility'}</span>
+                        <span>${isHidden ? 'Not Visible' : 'Visible'}</span>
+                      </span>
+                      
+                      <!-- Visual Formatting & Color Tools (Google Docs Ribbon) -->
+                      <div class="format-bar">
+                        <button type="button" class="fmt-btn" onmousedown="event.preventDefault()" onclick="StudioApp.insertBreak('${key}')" title="Insert line break (↵ Break)">
+                          <span class="material-symbols-outlined" style="font-size: 16px;">keyboard_return</span>
+                          <span>Break</span>
+                        </button>
+                        <button type="button" class="fmt-btn" onmousedown="event.preventDefault()" onclick="StudioApp.formatRichText('${key}', 'bold')" title="Bold (Cmd+B / Ctrl+B)">
+                          <span class="material-symbols-outlined" style="font-size: 16px;">format_bold</span>
+                          <span>Bold</span>
+                        </button>
+                        <button type="button" class="fmt-btn" onmousedown="event.preventDefault()" onclick="StudioApp.formatRichText('${key}', 'italic')" title="Italic (Cmd+I / Ctrl+I)">
+                          <span class="material-symbols-outlined" style="font-size: 16px;">format_italic</span>
+                          <span>Italic</span>
+                        </button>
+                        
+                        <!-- Font Color Swatches -->
+                        <div class="color-swatches" title="Pick font color for selected text">
+                          <span class="material-symbols-outlined" style="font-size: 16px; color: var(--md-sys-color-on-surface-muted);">palette</span>
+                          <button type="button" class="swatch-btn" style="background:#A71F23;" title="Crimson (#A71F23)" onmousedown="event.preventDefault()" onclick="StudioApp.applyColorRich('${key}', '#A71F23')"></button>
+                          <button type="button" class="swatch-btn" style="background:#C49A45;" title="Gold (#C49A45)" onmousedown="event.preventDefault()" onclick="StudioApp.applyColorRich('${key}', '#C49A45')"></button>
+                          <button type="button" class="swatch-btn" style="background:#8A151B;" title="Maroon (#8A151B)" onmousedown="event.preventDefault()" onclick="StudioApp.applyColorRich('${key}', '#8A151B')"></button>
+                          <button type="button" class="swatch-btn" style="background:#2D2926;" title="Charcoal (#2D2926)" onmousedown="event.preventDefault()" onclick="StudioApp.applyColorRich('${key}', '#2D2926')"></button>
+                          <input type="color" class="color-picker-native" value="#A71F23" title="Custom color picker" onchange="StudioApp.applyColorRich('${key}', this.value)">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="rich-editable-box"
+                         id="editor-${key}"
+                         contenteditable="true"
+                         data-placeholder="Click to type content..."
+                         oninput="StudioApp.onRichInput('${key}')"
+                         onblur="StudioApp.onRichBlur('${key}')"
+                         onkeydown="StudioApp.onRichKeyDown(event, '${key}')"
+                         onpaste="StudioApp.onRichPaste(event, '${key}')">${val || ''}</div>
+                  </div>
+                </div>
+              `;
+            });
+
+            if (groupItemsHtml) {
+              sectionHtml += `
+                <div class="group-container">
+                  <div class="group-heading">${group.title}</div>
+                  ${groupItemsHtml}
+                </div>
+              `;
+            }
+          });
+
+          if (sectionHasMatches) {
+            const cardEl = document.createElement('div');
+            cardEl.className = 'section-card';
+            cardEl.innerHTML = `
+              <div class="section-header">
+                <div class="section-title">${section.title}</div>
+              </div>
+              ${sectionHtml}
+            `;
+            container.appendChild(cardEl);
+          }
+        });
+
+        if (totalMatches === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
+              <div style="font-size: 32px; margin-bottom: 12px;">🔍</div>
+              <h3 style="font-size: 16px; margin-bottom: 6px;">No matching content found</h3>
+              <p style="font-size: 14px;">Try adjusting your search terms or filter.</p>
+            </div>
+          `;
+        }
+      },
+
+      updateField(key, value) {
+        this.data[key] = value;
+        
+        const cardEl = document.getElementById(`card-${key}`);
+        if (cardEl) {
+          const isHidden = !this.data[key] || this.data[key].trim() === '';
+          const isModified = this.data[key] !== (this.initialData[key] || '');
+          cardEl.classList.toggle('is-hidden', isHidden);
+          cardEl.classList.toggle('is-modified', isModified);
+          const badge = cardEl.querySelector('.badge-status');
+          if (badge) {
+            badge.className = `badge-status ${isHidden ? 'hidden' : 'visible'}`;
+            badge.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">${isHidden ? 'visibility_off' : 'visibility'}</span> <span>${isHidden ? 'Not Visible' : 'Visible'}</span>`;
+          }
+        }
+
+        this.updateGitStatus();
+        this.pushToLivePreview();
+      },
+
+      deleteKey(key) {
+        this.data[key] = '';
+        this.render();
+        this.showToast(`Deleted: ${key}`, 'success');
+        this.updateGitStatus();
+        this.pushToLivePreview();
+      },
+
+      restoreKey(key) {
+        this.data[key] = this.initialData[key] || '';
+        this.render();
+        this.showToast(`Restored: ${key}`, 'success');
+        this.updateGitStatus();
+        this.pushToLivePreview();
+      },
+
+      insertBreak(key) {
+        const editor = document.getElementById(`editor-${key}`);
+        if (!editor) return;
+
+        if (document.activeElement !== editor) {
+          editor.focus();
+        }
+
+        const sel = window.getSelection();
+        if (sel && sel.rangeCount > 0) {
+          const range = sel.getRangeAt(0);
+          range.deleteContents();
+          const br = document.createElement('br');
+          range.insertNode(br);
+          range.setStartAfter(br);
+          range.setEndAfter(br);
+          sel.removeAllRanges();
+          sel.addRange(range);
+        } else {
+          document.execCommand('insertLineBreak');
+        }
+        this.onRichInput(key);
+      },
+
+      formatRichText(key, cmd) {
+        const editor = document.getElementById(`editor-${key}`);
+        if (!editor) return;
+
+        if (document.activeElement !== editor) {
+          editor.focus();
+        }
+        document.execCommand(cmd, false, null);
+        this.onRichInput(key);
+      },
+
+      applyColorRich(key, colorHex) {
+        const editor = document.getElementById(`editor-${key}`);
+        if (!editor) return;
+
+        if (document.activeElement !== editor) {
+          editor.focus();
+        }
+
+        const sel = window.getSelection();
+        if (!sel || sel.rangeCount === 0 || sel.isCollapsed) {
+          this.showToast('Please select text inside the box first to apply color', 'warning');
+          return;
+        }
+
+        const range = sel.getRangeAt(0);
+        if (!editor.contains(range.commonAncestorContainer)) {
+          this.showToast('Please select text inside the box', 'warning');
+          return;
+        }
+
+        try {
+          document.execCommand('styleWithCSS', false, true);
+          document.execCommand('foreColor', false, colorHex);
+        } catch(e) {
+          const span = document.createElement('span');
+          span.style.color = colorHex;
+          span.appendChild(range.extractContents());
+          range.insertNode(span);
+        }
+
+        this.onRichInput(key);
+        this.showToast(`Applied color ${colorHex}!`, 'success');
+      },
+
+      onRichInput(key) {
+        const editor = document.getElementById(`editor-${key}`);
+        if (!editor) return;
+        let val = editor.innerHTML;
+        const clean = val.trim();
+        if (clean === '<br>' || clean === '<div><br></div>' || clean === '<p><br></p>' || clean === '&nbsp;' || clean === '') {
+          val = '';
+        } else {
+          val = val
+            .replace(/<div><br><\/div>/gi, '<br>')
+            .replace(/<div>/gi, '<br>')
+            .replace(/<\/div>/gi, '')
+            .replace(/<p><br><\/p>/gi, '<br><br>')
+            .replace(/<p>/gi, '')
+            .replace(/<\/p>/gi, '<br><br>')
+            .replace(/\r\n|\r|\n/g, '<br>');
+        }
+        this.updateField(key, val);
+      },
+
+      onRichBlur(key) {
+        this.onRichInput(key);
+      },
+
+      onRichKeyDown(e, key) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          this.insertBreak(key);
+        }
+      },
+
+      onRichPaste(e, key) {
+        e.preventDefault();
+        const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+        document.execCommand('insertText', false, text);
+        this.onRichInput(key);
+      },
+
+      // Live Preview Management
+      togglePreview() {
+        const panel = document.getElementById('previewPanel');
+        this.previewVisible = !this.previewVisible;
+        panel.classList.toggle('collapsed', !this.previewVisible);
+        document.getElementById('previewBtnLabel').textContent = this.previewVisible ? 'Hide Preview' : 'Live Preview';
+        if (this.previewVisible) {
+          this.pushToLivePreview();
+        }
+      },
+
+      setPreviewPage(page) {
+        this.previewPage = page;
+        document.getElementById('previewPageSelect').value = page;
+        const iframe = document.getElementById('previewIframe');
+        iframe.src = page + '?v=' + Date.now();
+      },
+
+      refreshPreview() {
+        const iframe = document.getElementById('previewIframe');
+        iframe.contentWindow.location.reload();
+      },
+
+      pushToLivePreview() {
+        const iframe = document.getElementById('previewIframe');
+        if (!iframe || !iframe.contentWindow) return;
+        try {
+          const win = iframe.contentWindow;
+          if (win.GTM_CMS && win.GTM_CMS.setDictionary) {
+            win.GTM_CMS.setDictionary('en', this.data);
+          } else if (win.GTM_CMS && win.GTM_CMS.applyDOM) {
+            win.GTM_CMS.applyDOM('en');
+          }
+        } catch(e) {}
+      },
+
+      // Save & Publish
+      async saveDraft() {
+        const dInfo = DOMAINS[this.currentDomain] || DOMAINS.gtm2026;
+        try {
+          const res = await fetch('/api/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ domain: this.currentDomain, en: this.data })
+          });
+          if (res.ok) {
+            const result = await res.json();
+            if (result.success) {
+              this.initialData = JSON.parse(JSON.stringify(this.data));
+              localStorage.removeItem(`${this.currentDomain}_draft_en`);
+              this.updateGitStatus(result.git);
+              this.render();
+              this.showToast(`Draft saved for ${dInfo.domain}`, 'success');
+              return;
+            }
+          }
+        } catch(e) {}
+
+        localStorage.setItem(`${this.currentDomain}_draft_en`, JSON.stringify(this.data));
+        this.showToast(`Draft saved in browser for ${dInfo.name}! Click "Publish Live" to push to website.`, 'success');
+      },
+
+      async executePublish() {
+        const dInfo = DOMAINS[this.currentDomain] || DOMAINS.gtm2026;
+        const commitMsg = `Update content for ${dInfo.domain} via G&M Content Studio`;
+        const token = localStorage.getItem('gtm2026_gh_token') || DEFAULT_GH_TOKEN;
+        const btn = document.getElementById('btnPublishLive');
+        const icon = document.getElementById('publishIcon');
+        const label = document.getElementById('publishBtnText');
+
+        if (btn) btn.disabled = true;
+        if (icon) icon.textContent = 'sync';
+        if (label) label.textContent = 'Publishing...';
+
+        this.showToast(`Publishing live to ${dInfo.domain}...`, 'info');
+
+        // 1. Try local server API first if running locally
+        try {
+          const res = await fetch('/api/publish', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              domain: this.currentDomain,
+              en: this.data,
+              commit_message: commitMsg
+            })
+          });
+          if (res.ok) {
+            const result = await res.json();
+            if (result.success) {
+              this.initialData = JSON.parse(JSON.stringify(this.data));
+              localStorage.removeItem(`${this.currentDomain}_draft_en`);
+              this.updateGitStatus(result.git);
+              this.render();
+              if (btn) btn.disabled = false;
+              if (icon) icon.textContent = 'rocket_launch';
+              if (label) label.textContent = 'Publish Live';
+              this.showToast(`🎉 Published Live to ${dInfo.domain}! Commit: ${result.commit || 'pushed'}`, 'success');
+              return;
+            }
+          }
+        } catch(e) {}
+
+        // 2. Direct GitHub API Publish from web browser
+        try {
+          await this.publishViaGitHubAPI(dInfo.repo, token, commitMsg);
+          this.initialData = JSON.parse(JSON.stringify(this.data));
+          localStorage.removeItem(`${this.currentDomain}_draft_en`);
+          this.render();
+          if (btn) btn.disabled = false;
+          if (icon) icon.textContent = 'rocket_launch';
+          if (label) label.textContent = 'Publish Live';
+          this.showToast(`🎉 Published to ${dInfo.domain} via GitHub Pages! Live in ~30s.`, 'success');
+        } catch(ghErr) {
+          if (btn) btn.disabled = false;
+          if (icon) icon.textContent = 'rocket_launch';
+          if (label) label.textContent = 'Publish Live';
+          this.showToast(`GitHub Publish error: ${ghErr.message}`, 'error');
+        }
+      },
+
+      async publishViaGitHubAPI(repo, token, commitMsg) {
+        const enStr = JSON.stringify(this.data, null, 2);
+        const utf8_to_b64 = (str) => btoa(unescape(encodeURIComponent(str)));
+
+        // Update locales/en.json on GitHub
+        const enMetaRes = await fetch(`https://api.github.com/repos/${repo}/contents/locales/en.json`, {
+          headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+        });
+        if (!enMetaRes.ok) throw new Error('GitHub token invalid or lacks repo write permissions for ' + repo);
+        const enMeta = await enMetaRes.json();
+
+        const enPutRes = await fetch(`https://api.github.com/repos/${repo}/contents/locales/en.json`, {
+          method: 'PUT',
+          headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: `${commitMsg} (locales/en.json)`,
+            content: utf8_to_b64(enStr),
+            sha: enMeta.sha,
+            branch: 'main'
+          })
+        });
+        if (!enPutRes.ok) throw new Error(`Failed to update en.json on GitHub for ${repo}`);
+      },
+
+      async cloneFromGTM() {
+        if (this.currentDomain === 'gtm2026') return;
+        const dInfo = DOMAINS[this.currentDomain];
+        const proceed = confirm(`⚠️ Are you sure you want to clone all content from GTM 2026 into ${dInfo.name} (${dInfo.domain})?\n\nThis will replace all text fields in ${dInfo.name} with the current GTM 2026 content.`);
+        if (!proceed) return;
+
+        // Try local server clone API
+        try {
+          const res = await fetch('/api/clone-from-gtm', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ domain: this.currentDomain })
+          });
+          if (res.ok) {
+            const result = await res.json();
+            if (result.success) {
+              this.data = { ...result.en };
+              this.initialData = JSON.parse(JSON.stringify(result.en));
+              localStorage.removeItem(`${this.currentDomain}_draft_en`);
+              this.render();
+              this.pushToLivePreview();
+              this.showToast(`✅ Cloned content from GTM 2026 into ${dInfo.domain}!`, 'success');
+              return;
+            }
+          }
+        } catch(e) {}
+
+        // Fallback: fetch GTM 2026 en.json
+        try {
+          const res = await fetch('locales/en.json?v=' + Date.now());
+          const gtmData = await res.json();
+          this.data = { ...gtmData };
+          this.render();
+          this.pushToLivePreview();
+          this.showToast(`✅ Cloned content from GTM 2026 into ${dInfo.name}! Remember to save/publish.`, 'success');
+        } catch(e) {
+          this.showToast('Failed to fetch GTM 2026 content to clone', 'error');
+        }
+      },
+
+      downloadBackup() {
+        const dInfo = DOMAINS[this.currentDomain] || DOMAINS.gtm2026;
+        const enBlob = new Blob([JSON.stringify(this.data, null, 2)], { type: 'application/json' });
+        const a1 = document.createElement('a');
+        a1.href = URL.createObjectURL(enBlob);
+        a1.download = `en_${this.currentDomain}.json`;
+        a1.click();
+        this.showToast(`Downloaded backup for ${dInfo.domain}!`, 'success');
+      },
+
+      showToast(msg, type = 'success') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = msg;
+        container.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+        }, 3500);
+      },
+
+      escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+      },
+
+      escapeAttr(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/"/g, '&quot;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+      },
+
+      setupShortcuts() {
+        window.addEventListener('keydown', (e) => {
+          if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+            e.preventDefault();
+            this.saveDraft();
+          }
+          if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            const input = document.getElementById('searchInput');
+            if (input) input.focus();
+          }
+        });
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      StudioApp.init();
+    });
+  </script>
+</body>
+</html>

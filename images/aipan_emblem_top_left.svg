@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" width="100%" height="100%" fill="none">
+  <g fill="#9A2D29" stroke="#9A2D29">
+    <!-- Center Concentric Hollow Diamond (1pt thicker) -->
+    <path d="M 0 -19.5 L 19.5 0 L 0 19.5 L -19.5 0 Z M 0 -8.5 L -8.5 0 L 0 8.5 L 8.5 0 Z" fill="#9A2D29" stroke="none" fill-rule="evenodd"/>
+
+    <!-- Main Diamond & 4 Interlocking Dhoka/Petal Loops (Stroke increased by 1pt) -->
+    <path d="
+      M -48 0
+      L 0 -48
+      C 13 -57 14 -70 0 -78
+      C -14 -70 -13 -57 0 -48
+      L 48 0
+      C 57 13 70 14 78 0
+      C 70 -14 57 -13 48 0
+      L 0 48
+      C -13 57 -14 70 0 78
+      C 14 70 13 57 0 48
+      L -48 0
+      C -57 -13 -70 -14 -78 0
+      C -70 14 -57 13 -48 0
+      Z" 
+      fill="none" 
+      stroke="#9A2D29" 
+      stroke-width="8.2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"/>
+
+    <!-- 4 Cardinal Outer Bindu Dots -->
+    <circle cx="0" cy="-91.5" r="4.6" fill="#9A2D29" stroke="none"/>
+    <circle cx="91.5" cy="0" r="4.6" fill="#9A2D29" stroke="none"/>
+    <circle cx="0" cy="91.5" r="4.6" fill="#9A2D29" stroke="none"/>
+    <circle cx="-91.5" cy="0" r="4.6" fill="#9A2D29" stroke="none"/>
+
+    <!-- 4 Quadrants Diagonal Ornaments (Rice-Grain Teardrops & Framing Dots) -->
+    <!-- NE (0 deg) -->
+    <g transform="rotate(0)">
+      <circle cx="44.5" cy="-44.5" r="3.4" fill="#9A2D29" stroke="none"/>
+      <circle cx="54" cy="-54" r="3.4" fill="#9A2D29" stroke="none"/>
+      <path d="M 35 -28.5 C 43 -25 50 -32 46.5 -37 C 43 -42 36 -35 35 -28.5 Z" fill="#9A2D29" stroke="none"/>
+      <path d="M 28.5 -35 C 35 -36 42 -43 37 -46.5 C 32 -50 25 -43 28.5 -35 Z" fill="#9A2D29" stroke="none"/>
+    </g>
+
+    <!-- SE (90 deg) -->
+    <g transform="rotate(90)">
+      <circle cx="44.5" cy="-44.5" r="3.4" fill="#9A2D29" stroke="none"/>
+      <circle cx="54" cy="-54" r="3.4" fill="#9A2D29" stroke="none"/>
+      <path d="M 35 -28.5 C 43 -25 50 -32 46.5 -37 C 43 -42 36 -35 35 -28.5 Z" fill="#9A2D29" stroke="none"/>
+      <path d="M 28.5 -35 C 35 -36 42 -43 37 -46.5 C 32 -50 25 -43 28.5 -35 Z" fill="#9A2D29" stroke="none"/>
+    </g>
+
+    <!-- SW (180 deg) -->
+    <g transform="rotate(180)">
+      <circle cx="44.5" cy="-44.5" r="3.4" fill="#9A2D29" stroke="none"/>
+      <circle cx="54" cy="-54" r="3.4" fill="#9A2D29" stroke="none"/>
+      <path d="M 35 -28.5 C 43 -25 50 -32 46.5 -37 C 43 -42 36 -35 35 -28.5 Z" fill="#9A2D29" stroke="none"/>
+      <path d="M 28.5 -35 C 35 -36 42 -43 37 -46.5 C 32 -50 25 -43 28.5 -35 Z" fill="#9A2D29" stroke="none"/>
+    </g>
+
+    <!-- NW (270 deg) -->
+    <g transform="rotate(270)">
+      <circle cx="44.5" cy="-44.5" r="3.4" fill="#9A2D29" stroke="none"/>
+      <circle cx="54" cy="-54" r="3.4" fill="#9A2D29" stroke="none"/>
+      <path d="M 35 -28.5 C 43 -25 50 -32 46.5 -37 C 43 -42 36 -35 35 -28.5 Z" fill="#9A2D29" stroke="none"/>
+      <path d="M 28.5 -35 C 35 -36 42 -43 37 -46.5 C 32 -50 25 -43 28.5 -35 Z" fill="#9A2D29" stroke="none"/>
+    </g>
+  </g>
+</svg>

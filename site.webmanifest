@@ -1,0 +1,20 @@
+{
+  "name": "Mrinal weds Garima",
+  "short_name": "Mrinal & Garima",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#A71F23",
+  "theme_color": "#A71F23",
+  "icons": [
+    {
+      "src": "images/favicon-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "images/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
