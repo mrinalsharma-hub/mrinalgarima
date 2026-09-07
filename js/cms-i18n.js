@@ -28,7 +28,7 @@
     var host = (window.location && window.location.hostname ? window.location.hostname : '').toLowerCase();
     if (host.indexOf('mrinalgarima') !== -1) return 'mrinalgarima';
     if (host.indexOf('garimamrinal') !== -1) return 'garimamrinal';
-    if (host.indexOf('gtm') !== -1) return 'gtm2026';
+    if (host.indexOf('gtm') !== -1) return 'mrinalgarima';
 
     try {
       var stored = (localStorage.getItem('wedding_access_key') || sessionStorage.getItem('wedding_access_key') || localStorage.getItem('gtm2026_auth') || '').toLowerCase();
@@ -36,7 +36,7 @@
       if (stored.indexOf('garimamrinal') !== -1) return 'garimamrinal';
     } catch(e) {}
 
-    return 'gtm2026';
+    return 'mrinalgarima';
   }
 
   function getCurrentLanguage() {
@@ -95,7 +95,7 @@
     } else {
       if (key === 'home.hero.bride' || key === 'home.hero.bride_name') return 'GARIMA';
       if (key === 'home.hero.groom' || key === 'home.hero.groom_name') return 'MRINAL';
-      if (key === 'global.nav.gm') return 'G&M';
+      if (key === 'global.nav.gm') return (lang === 'hi' ? 'म & ग' : 'M&G');
       if (key === 'global.title') return 'Garima & Mrinal · Nainital 2026';
       if (key === 'global.meta_desc') return 'Garima & Mrinal · A wedding in the Kumaon hills · 20–22 November 2026 · Nainital, Uttarakhand';
       if (key === 'stay.header.banner_line2' && val && val.indexOf('MRINAL') !== -1) return 'GARIMA & MRINAL · 20-22 NOV 2026';
