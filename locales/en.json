@@ -1,6 +1,6 @@
 {
-  "global.title": "Mrinal &amp; Garima",
-  "global.meta_desc": "Mrinal &amp; Garima · A wedding in the Kumaon hills",
+  "global.title": "Mrinal & Garima · Nainital 2026",
+  "global.meta_desc": "Mrinal & Garima · A wedding in the Kumaon hills · 20–22 November 2026 · Nainital, Uttarakhand",
   "global.nav.gm": "M&G",
   "global.nav.travel_stay": "Travel & Stay",
   "global.nav.celebrations": "Celebrations",
@@ -141,8 +141,8 @@
   "invite.ctl.skip": "Skip ›",
   "invite.ctl.replay": "↻ Replay",
   "auth.title": "Mrinal & Garima · Invitation Gateway",
-  "auth.forever": "ARE BEGINNING THEIR FOREVER",
-  "auth.enter_code": "ENTER THE CODE PROVIDED",
+  "auth.forever": "INVITE YOU TO CELEBRATE WITH US",
+  "auth.enter_code": "ENTER YOUR INVITATION CODE",
   "auth.tap_prompt": "TAP THE ENVELOPE TO OPEN",
   "auth.error_message": "Incorrect passcode, please try again.",
   "auth.passcodes": "mrinalgarima, gtm2026, garimamrinal, 2026, nainital"
