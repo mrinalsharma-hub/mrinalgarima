@@ -4,24 +4,52 @@
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png?v=35000">
 <script>
 (function() {
-  function applyAuthTheme() {
-    var lightMetas = document.querySelectorAll('meta[name="theme-color"]:not([media*="dark"])');
-    lightMetas.forEach(function(m) { m.setAttribute('content', '#3F151D'); });
-    var darkMetas = document.querySelectorAll('meta[name="theme-color"][media*="dark"]');
-    darkMetas.forEach(function(m) { m.setAttribute('content', '#3F151D'); });
-    var colorSchemeMeta = document.querySelector('meta[name="color-scheme"]');
-    if (colorSchemeMeta) colorSchemeMeta.setAttribute('content', 'dark');
+  function getCookie(name) {
+    var value = '; ' + document.cookie;
+    var parts = value.split('; ' + name + '=');
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
+  var VALID_CODES = ['gtm2026', 'mrinalgarima', 'garimamrinal', '2026', 'nainital', 'garima', 'mrinal'];
+  var isAuthed = false;
+  try {
+    var key = (localStorage.getItem('wedding_access_key') || sessionStorage.getItem('wedding_access_key') || '').trim().toLowerCase();
+    if (key && VALID_CODES.indexOf(key) !== -1) isAuthed = true;
+    var authFlag = localStorage.getItem('gtm2026_auth') || sessionStorage.getItem('gtm2026_auth') || getCookie('gtm2026_auth');
+    if (authFlag === 'true' || (authFlag && VALID_CODES.indexOf(String(authFlag).trim().toLowerCase()) !== -1)) isAuthed = true;
+    if (localStorage.getItem('gtm2026_has_authenticated') === 'true' || getCookie('gtm2026_has_authenticated') === 'true') isAuthed = true;
+  } catch(e) {}
+
+  if (isAuthed) {
     if (document.documentElement) {
-      document.documentElement.style.backgroundColor = '#3F151D';
-      document.documentElement.style.background = '#3F151D';
+      document.documentElement.style.backgroundColor = '#FFEFD4';
+      document.documentElement.style.background = '#FFEFD4';
     }
     if (document.body) {
-      document.body.style.backgroundColor = '#3F151D';
-      document.body.style.background = '#3F151D';
+      document.body.style.backgroundColor = '#FFEFD4';
+      document.body.style.background = '#FFEFD4';
     }
+    window.location.replace('G%26M.html');
+  } else {
+    function applyAuthTheme() {
+      var lightMetas = document.querySelectorAll('meta[name="theme-color"]:not([media*="dark"])');
+      lightMetas.forEach(function(m) { m.setAttribute('content', '#3F151D'); });
+      var darkMetas = document.querySelectorAll('meta[name="theme-color"][media*="dark"]');
+      darkMetas.forEach(function(m) { m.setAttribute('content', '#3F151D'); });
+      var colorSchemeMeta = document.querySelector('meta[name="color-scheme"]');
+      if (colorSchemeMeta) colorSchemeMeta.setAttribute('content', 'dark');
+      if (document.documentElement) {
+        document.documentElement.style.backgroundColor = '#3F151D';
+        document.documentElement.style.background = '#3F151D';
+      }
+      if (document.body) {
+        document.body.style.backgroundColor = '#3F151D';
+        document.body.style.background = '#3F151D';
+      }
+    }
+    applyAuthTheme();
+    document.addEventListener('DOMContentLoaded', applyAuthTheme);
   }
-  applyAuthTheme();
-  document.addEventListener('DOMContentLoaded', applyAuthTheme);
 })();
 </script>
 <meta charset="UTF-8">
@@ -34,14 +62,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
-<title data-i18n="auth.title">Mrinal &amp; Garima · Invitation Gateway</title>
-<meta name="description" content="Mrinal &amp; Garima · A wedding in the Kumaon hills · 20–22 November 2026 · Nainital, Uttarakhand" data-i18n-attr="content:global.meta_desc">
-<meta property="og:title" content="Mrinal &amp; Garima · Invitation Gateway">
-<meta property="og:description" content="Mrinal &amp; Garima · A wedding in the Kumaon hills · 20–22 November 2026 · Nainital, Uttarakhand">
+<title data-i18n="auth.title">Garima weds Mrinal · Invitation Gateway</title>
+<meta name="description" content="Garima &amp; Mrinal · A wedding in the Kumaon hills · 20–22 November 2026 · Nainital, Uttarakhand" data-i18n-attr="content:global.meta_desc">
+<meta property="og:title" content="Garima &amp; Mrinal · Invitation Gateway">
+<meta property="og:description" content="Garima &amp; Mrinal · A wedding in the Kumaon hills · 20–22 November 2026 · Nainital, Uttarakhand">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png?v=35000">
 <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png?v=35000">
 <link rel="icon" type="image/x-icon" href="favicon.ico?v=35000">
-<link rel="manifest" href="site.webmanifest">
+<link rel="manifest" href="site.webmanifest?v=26800">
 
 <!-- Preload critical fonts & assets -->
 <link rel="preload" as="font" href="fonts/Kugile.ttf?v=24700" type="font/ttf" crossorigin>
@@ -701,10 +729,10 @@ body {
     <!-- ── 1. Top Section: Typography Lockup & Subtitle ── -->
     <div class="auth-top-stack">
       <div class="auth-names">
-        <h1 class="auth-name-line-1 auth-name auth-name-first auth-name-1" id="auth-name-1">MRINAL</h1>
+        <h1 class="auth-name-line-1 auth-name auth-name-first auth-name-1" id="auth-name-1">GARIMA</h1>
         <div class="auth-name-line-2 auth-name-row">
           <span class="auth-ampersand auth-amp">&amp;</span>
-          <span class="auth-name-text auth-name auth-name-second auth-name-2" id="auth-name-2">GARIMA</span>
+          <span class="auth-name-text auth-name auth-name-second auth-name-2" id="auth-name-2">MRINAL</span>
         </div>
       </div>
 
